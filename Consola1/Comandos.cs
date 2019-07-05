@@ -45,12 +45,25 @@ namespace Consola
         
         public static void About_console()
         {
-            Console.Clear(); //Limpiamos el texto de la consola
-            Console.ForegroundColor = ConsoleColor.Green; //Cambiamos el color de texto a verde
+            const string msg_about = "Esta aplicación de consola le permitira ver la hora y fecha actual, saber que combinaciones de teclas pulsas, etc.";
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Programa creado y desarroyado por Zegameus Co. (ZCNR)");
             Console.WriteLine("(c)Zegameus Company Network Records\nConsola de Prueba.");
+            Console.WriteLine(msg_about);
             Console.WriteLine("Pulsa Cualquier tecla para continuar");
             Console.ReadKey();//espera hasta que se pulse una tecla
+        }
+        public static void Help_console()
+        {
+            Console.ForegroundColor = ConsoleColor.Green; //cambia el color de letra a verde claro
+            Console.WriteLine("Los comandos disponibles para esta app son:\n");
+            Console.WriteLine("help: Muestra esta ayuda.");
+            Console.WriteLine("about: Muestra información sobre la app.");
+            Console.WriteLine("hora: Muestra la hora.");
+            Console.WriteLine("teclas: Muestra una interfaz que permite saber que teclas pulsas");
+            Console.WriteLine("exit: Sale del programa.");
+            //Aquí añades tus propios comandos
         }
     }
 }
