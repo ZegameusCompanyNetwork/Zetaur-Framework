@@ -6,9 +6,9 @@ namespace Consola
     {
         static void Main(string[] args)
         {
+            Console.Title = "Consola de Prueba"; //Establecemos un título a nuestra consola
             Startup init = new Startup();
-            init.Sec_init();
-            Console.WriteLine("."); //Código de salida; Exit
+            init.Sec_init(); //Iniciamos la clase Startup en el método "Sec_init"
         }
     }
 }
