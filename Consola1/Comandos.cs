@@ -1,4 +1,5 @@
 using System; //Declaramos que usamos la libreria System
+using System.Windows.Forms;
 
 namespace Consola
 {
@@ -6,7 +7,7 @@ namespace Consola
     {
         public void Comand () {
         init: //Declraramos un label para poder crear un bucle con goto
-            string Ln_cmd = "Introduce un comándo válido para continuar (teclé help para ayuda)\n";
+            string Ln_cmd = "\nIntroduce un comándo válido para continuar (teclé help para ayuda)\n";
             Console.WriteLine(Ln_cmd);
             string Cmd = Console.ReadLine();//Declaramos una variable de tipo string cuyo valor será asignado con la entrada de texto
             if(Cmd == "help"){
@@ -20,7 +21,20 @@ namespace Consola
             }
             else if(Cmd == "exit")
             {
-                Console.Write("."); //Imprime un punto y se cierra la consola al no haber ninguna otra acción después
+                Application.Exit(); // Cierra la Consola
+            }
+            else if(Cmd == "hora")
+            {
+                Console.WriteLine("Hora y Fecha: {0}\n", DateTime.Now);// Esto nos imprime la hora y la fecha en consola
+                Console.WriteLine("Solo la hora: {0}\n", DateTime.Now.ToString("h:mm:ss")); //Esto nos imprime solo la hora
+                Console.WriteLine("Solo la Fecha: {0}\n", DateTime.Now.ToString("dd/MM/yyyy")); //Esto nos imprime solo la fecha
+                Console.ReadKey();
+                goto init;
+            }
+            else if(Cmd == "teclas"){
+                Teclas teclas = new Teclas(); //llamamos a la clase Teclas
+                teclas.Wkeytouch();
+                goto init;
             }
             else
             {
@@ -28,14 +42,7 @@ namespace Consola
                 goto init;
             }
         }
-        public static void Help_console(){
-            Console.ForegroundColor = ConsoleColor.Green; //cambia el color de letra a verde claro
-            Console.WriteLine("Los comandos disponibles para esta app son:\n");
-            Console.WriteLine("help: Muestra esta ayuda.");
-            Console.WriteLine("about: Muestra información sobre la app.");
-            Console.WriteLine("exit: Sale del programa");
-            //Aquí añades tus propios comandos
-        }
+        
         public static void About_console()
         {
             Console.Clear(); //Limpiamos el texto de la consola
