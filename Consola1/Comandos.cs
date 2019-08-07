@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*#########################################################
+ *#    Copyright 2019 Zegameus Company Network Records    #
+ *#                     Licencia MIT                      #
+ *#########################################################
+ */
+using System;
 using System.Windows.Forms;
 
 namespace Consola
@@ -47,6 +52,11 @@ namespace Consola
                 Console.Clear();                
                 goto init;
             }
+            else if(Cmd == "conversor")
+            {
+                Cmd_conversor.Cmd_prn();
+                goto init;
+            }
             else //En caso de que el comando introducido no sea identificado imprimimos un texto en pantalla
             {
                 Console.WriteLine("Comando no encontrado");
@@ -70,6 +80,7 @@ namespace Consola
             Console.WriteLine("Los comandos disponibles para esta app son:\n");
             Console.WriteLine("help: Muestra esta ayuda.");
             Console.WriteLine("clear: limpia la pantalla.");
+            Console.WriteLine("conversor: Le cambia a la consola de conversores");
             Console.WriteLine("about: Muestra información sobre la app.");
             Console.WriteLine("hora: Muestra la hora.");
             Console.WriteLine("permutaciones: inicia una calculadora de factoriales");

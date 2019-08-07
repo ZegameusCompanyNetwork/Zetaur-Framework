@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*#########################################################
+ *#    Copyright 2019 Zegameus Company Network Records    #
+ *#                     Licencia MIT                      #
+ *#########################################################
+ */
+using System;
 using System.Threading.Tasks;
 
 namespace Consola

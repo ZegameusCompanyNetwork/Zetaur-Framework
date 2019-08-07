@@ -10,4 +10,7 @@
     <FallbackCulture>es-ES</FallbackCulture>
     <VerifyUploadedFiles>true</VerifyUploadedFiles>
   </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
 </Project>
