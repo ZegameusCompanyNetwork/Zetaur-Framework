@@ -12,7 +12,7 @@ namespace Consola
         public static void Cmd_prn()
         {
             init:
-            Console.WriteLine("Sección de conversiones");
+            Console.WriteLine("\nSección de conversiones\nComandos disponibles:\n");
             string[] comandos = new string[5] { "temperatura", "longitud", "masa", "presion","inicio"};//Creamos un arreglo que contenga 5 valores (recordad que se empieza a contar desde el 0, por lo tanto es 0,1,2,3,4...).
             /* Establecemos el primer valor como temperatura
              * El segundo como longitud 
@@ -22,18 +22,20 @@ namespace Consola
              */
 
             //Vamos a mostrar los comandos en pantalla
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0}: Para ir al menú de temperatura.\n{1}: Para ir al menú de longitud.",comandos[0],comandos[1]);
             Console.WriteLine("{0}: Para ir al menú de masa.\n{1}: Para ir al menú de presion.\n{2}: Para ir al inicio.", comandos[2], comandos[3],comandos[4]);
             string cmd = Convert.ToString(Console.ReadLine());
             //Creamos una sección de if-else para los distintos apartados de esta sección
             if (cmd == comandos[0])
             {
-                Tmp_cmd();
+                Tmp_cmd();//Llamamos al m
                 goto init;
             }
             else if (cmd == comandos[1])
             {
-                Long_cmd();
+                Long_cmd();//llamamos al metodo del submenu de longitud
+                goto init;
             }
             else if (cmd == comandos[2])
             {
@@ -46,10 +48,11 @@ namespace Consola
             else if (cmd == comandos[4])
             {
                 Console.Clear();//Vamos a limpiar la pantalla
+                Console.ForegroundColor=ConsoleColor.Green;//y a cambiarle el color de letra
             }
             else
             {
-                Console.WriteLine("Comando no encontrado, compruebe su otrografía");
+                Console.WriteLine("\nComando no encontrado, compruebe su otrografía");
                 goto init;
             }
 
@@ -59,9 +62,9 @@ namespace Consola
         {
             init:
             string[] tmp = new string[7] {"celfahr", "fahrcel", "celkel", "kelcel", "fahrkel", "kelfahr","volver"};
-            Console.WriteLine("Sección de conversión de temperatura");
+            Console.WriteLine("\nSección de conversión de temperatura");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Comandos disponibles:\n{0}: Para convertir de Celsius a Fahrenheit.\n{1}: Para convertir de Fahrenheit a Celsius.", tmp[0], tmp[1]);
+            Console.WriteLine("\nComandos disponibles:\n{0}: Para convertir de Celsius a Fahrenheit.\n{1}: Para convertir de Fahrenheit a Celsius.", tmp[0], tmp[1]);
             Console.WriteLine("{0}: Para convertir de Celsius a Kelvins.\n{1}: Para convertir de Kelvins a Celsius.", tmp[2], tmp[3]);
             Console.WriteLine("{0}: Para convertir de Fahrenheit a Kelvins.\n{1}: Para convertir de Kelvin a Fahrenheit.", tmp[4], tmp[5]);
             Console.Write("{0} para volver atras.\n>>", tmp[6]);
@@ -100,7 +103,7 @@ namespace Consola
             }
             else
             {
-                Console.WriteLine("Comando no encontrado, revise la ortografía");
+                Console.WriteLine("\nComando no encontrado, revise la ortografía");
                 goto init;
             }
         }
@@ -110,7 +113,8 @@ namespace Consola
         {
             init:
             int[] c = new int[5] {1,2,3,4,5};
-            Console.WriteLine("Comandos disponibles:\n{0}: Para convertir de Kilómetros a millas/millas náuticas.", c[0]);
+            Console.ForegroundColor=ConsoleColor.Cyan;
+            Console.WriteLine("\nComandos disponibles:\n{0}: Para convertir de Kilómetros a millas/millas náuticas.", c[0]);
             Console.WriteLine("{0}: Para convertir de millas a kilómetros.\n{1}: Para convertir de Millas náuticas a kilómetros.", c[1], c[2]);
             Console.WriteLine("{0}: Para convertir de millas a millas náuticas.\n{1}: Para convertir de millas náuticas a millas.", c[3], c[4]);
             string i = Console.ReadLine();
@@ -137,10 +141,12 @@ namespace Consola
             }else if (i == "volver")
             {
                 Console.Clear();
+                Console.ForegroundColor=ConsoleColor.Green;
+                //Importante no poner el goto init, ya que nunca saldriamos de este bucle
             }
             else
             {
-                Console.WriteLine("Comando no encontrado, compruebe su ortografía.");
+                Console.WriteLine("\nComando no encontrado, compruebe su ortografía.");
                 goto init;
             }
         }
