@@ -10,39 +10,60 @@ namespace Consola
 {
     class Transformador
     {
+        const string FrmExc = "Usted ha introducido un valor no númerico, por favor introduzca un número";//Declaro una constante para cuando el usuario cometa un excepción de tipo FormatException, más info abajo
+        const string Rp = "Otra temperatura que calcular? S/N: ";//Vamos a ahorrar espacio creando una constante para las repeticiones, en este caso para temperatura
+        const string reop = "Otra medida a convertir (S/N): ";//Y en este para las medidas de longitud
+        const string sorn = "¿A introducido usted el valor adecuado?";//y esta para el S/N de continuar los bucles
         #region Temperatura
         #region Fahrenheit a Celsius
-        public static void FahrCel ()
+        public static void FahrCel()
         {
             bool rep = true; //Declaramos un booleano en condicion true para poder ejecutar un while a continuación
             const string Frm = "ºC = (ºF - 32) * 5 / 9";
             while (rep)
             {
-                Console.WriteLine("Introduzca una temperatura en grados Fahrenheit a calcular");
+                Console.WriteLine("Introduzca una temperatura en grados Fahrenheit a calcular:\n>>");
                 try
                 {
-                    double Fahrenheit = Convert.ToDouble(Console.ReadLine());
+                    double Fahrenheit = Convert.ToDouble(Console.ReadLine());//Hacemos que el usuario introduzca una cantidad por la consola, y obligamos a convertirla a double.
+                    //En caso de no poder por el motivo que sea, pasaremos al bloque catch.
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
                     Op_conversor.OpFarcel(Fahrenheit);
                 }
-                catch (Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))//Aquí creamos un encapsulador que en caso de error va a comprobar que el tipo de excepción producida no sea FormatException.
+                //Y en caso de que sea FormatException, el programa ejecutara el código del catch que contenga el argumento FormatException 
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
                 }
-                Console.WriteLine("Otra temperatura que calcular? S/N: ");
-                /*Creamos una condicion if, sin else, ya que este último vendría siendo el while; para mostrar en pantalla la cadena "go"
-                 con la instrucción go.ToUpper() hacemos que el valor introducido se combierta a mayúsculas, y si no es igual a S (!= "S") hace que el bool rep
-                 sea false, finalizando el bucle while
-                 */
+                catch (FormatException e)//Este es el bloque catch que se ejecutara en caso de que la excepción producida sea FormatException
+                {
+                    Console.WriteLine(FrmExc);//Llamamos a la constante declarada al principio del programa
+                    Console.WriteLine(e.Message + "\n");//e.Message nos permite mostrar una descripción corta del error, sin mostrar código del programa.
+                }
+                Console.WriteLine(Rp);
+            /*Creamos una condicion if, sin else, ya que este último vendría siendo el while; para mostrar en pantalla la cadena "go"
+             con la instrucción go.ToUpper() hacemos que el valor introducido se combierta a mayúsculas, y si no es igual a S (!= "S") hace que el bool rep
+             sea false, finalizando el bucle while
+             */
+            go:
                 string go = Console.ReadLine();
-                if (go.ToUpper() != "S")
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
                 {
                     rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
 
         }
-#endregion
+        #endregion
         #region Celsisus a Fahrenheit
         public static void CelFahr()
         {
@@ -57,19 +78,34 @@ namespace Consola
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm); //Mostramos en pantalla la fórmula utilizada, donde {0} es la cadena Frm
                     Op_conversor.OpCelFahr(Celsisus);
                 }
-                catch (Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e); //Imprimos la excepcion en caso de haber algún error (Por parte del usuario)
+                    Console.WriteLine(e.Message + "\n"); //Imprimios la excepcion en caso de haber algún error (Por parte del usuario)
                 }
-                Console.Write("Otra temperatura que calcular? S/N: ");
-                /*Creamos una condicion if, sin else, ya que este último vendría siendo el while; para mostrar en pantalla la cadena "go"
-                 con la instrucción go.ToUpper() hacemos que el valor introducido se combierta a mayúsculas, y si no es igual a S (!= "S") hace que el bool rep
-                 sea false, finalizando el bucle while
-                 */
-                string go = Console.ReadLine();
-                if (go.ToUpper() != "S") 
+                catch (FormatException e)
                 {
-                    rep = false; //Cambiamos de true a false
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.Write(Rp);
+            /*Creamos una condicion if, sin else, ya que este último vendría siendo el while; para mostrar en pantalla la cadena "go"
+             con la instrucción go.ToUpper() hacemos que el valor introducido se combierta a mayúsculas, y si no es igual a S (!= "S") hace que el bool rep
+            sea false, finalizando el bucle while
+            */
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
         }
@@ -82,22 +118,38 @@ namespace Consola
             const string Frm = "K= ºC + 273.15";
             while (rep)
             {
-                try {
-                    
+                try
+                {
+
                     Console.WriteLine("Introduce una temperatura en Grados Celsius a calcular");
                     double Celsius = Convert.ToDouble(Console.ReadLine());
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
                     Op_conversor.OpCelKel(Celsius);//Llamamos a la funcion de calcular dando el valor introducido
                 }
-                catch (Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
                 }
-                Console.WriteLine("Otra temperatura que calcular (S/N): ");
-                string go = Console.ReadLine();
-                if (go.ToString() != "S")
+                catch (FormatException e)
                 {
-                    rep = false;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.WriteLine(Rp);
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
         }
@@ -116,15 +168,30 @@ namespace Consola
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
                     Op_conversor.OpKelCel(kelvin);
                 }
-                catch (Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
                 }
-                Console.WriteLine("Otra temperatura que calcular (S/N): ");
-                string go = Console.ReadLine();
-                if (go.ToString() != "S")
+                catch (FormatException e)
                 {
-                    rep = false;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.WriteLine(Rp);
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
         }
@@ -143,15 +210,30 @@ namespace Consola
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
                     Op_conversor.OpFahrKel(fahr);
                 }
-                catch (Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
                 }
-                Console.WriteLine("Otra temperatura que calcular (S/N): ");
-                string go = Console.ReadLine();
-                if (go.ToString() != "S")
+                catch (FormatException e)
                 {
-                    rep = false;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.WriteLine(Rp);
+                go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
         }
@@ -170,22 +252,37 @@ namespace Consola
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
                     Op_conversor.OpKelFahr(kelvin);
                 }
-                catch (Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
                 }
-                Console.WriteLine("Otra temperatura que calcular (S/N): ");
-                string go = Console.ReadLine();
-                if (go.ToString() != "S")
+                catch (FormatException e)
                 {
-                    rep = false;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.WriteLine(Rp);
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
         }
         #endregion
         #endregion
         #region Longitud
-        const string reop = "Otra medida a convertir (S/N): ";//Vamos a ahorrar espacio creando una constante para las repeticiones
+
         #region Kilometro-Milla-M.Náutica
         public static void KmMll()
         {
@@ -198,16 +295,30 @@ namespace Consola
                     double km = Convert.ToDouble(Console.ReadLine());
                     Op_conversor.OpKmMMN(km);
                 }
-                catch (Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
                 }
-
-                Console.Write(reop);//llamamos a la constante reop declarada al inicio de la region Longitud, usamos solo Write para que se muestre a continuación el valor de S o N
-                string inp = Console.ReadLine();
-                if (inp.ToUpper() != "S")
+                catch (FormatException e)
                 {
-                    rep = false;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.Write(reop);//llamamos a la constante reop declarada al inicio de la region Longitud, usamos solo Write para que se muestre a continuación el valor de S o N
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
         }
@@ -222,15 +333,30 @@ namespace Consola
                     double Millas = Convert.ToDouble(Console.ReadLine());
                     Op_conversor.OpMKm(Millas);
                 }
-                catch (Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
                 }
                 Console.Write(reop);
-                string inp = Console.ReadLine();
-                if (inp.ToUpper() != "S")
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                 {
-                    rep = false;
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
         }
@@ -245,12 +371,31 @@ namespace Consola
                     double MNau = Convert.ToDouble(Console.ReadLine());
                     Op_conversor.OpMnKm(MNau);
                 }
-                catch(Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
                 }
                 Console.Write(reop);
-                string inp = Console.ReadLine();
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
+                }
             }
         }
         #endregion
@@ -266,15 +411,30 @@ namespace Consola
                     double Millas = Convert.ToDouble(Console.ReadLine());
                     Op_conversor.OpM_MN(Millas);
                 }
-                catch(Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
                 }
                 Console.Write(reop);
-                string inp = Console.ReadLine();
-                if (inp.ToUpper() != "S")
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                 {
-                    rep = false;
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
         }
@@ -291,13 +451,23 @@ namespace Consola
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine(e.Message + "\n");
                 }
                 Console.Write(reop);
-                string inp = Console.ReadLine();
-                if (inp.ToUpper() != "S")
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                 {
-                    rep = false;
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
                 }
             }
         }
