@@ -3,6 +3,7 @@
 ![GitHub](https://img.shields.io/github/license/ZegameusCompanyNetwork/Consola-basica-con-comandos?style=plastic)
 ![GitHub All Releases](https://img.shields.io/github/downloads/ZegameusCompanyNetwork/Consola-basica-con-comandos/total?label=Descargas&style=plastic)
 ![GitHub repo size](https://img.shields.io/github/repo-size/ZegameusCompanyNetwork/Consola-basica-con-comandos?color=AABBCC&label=Tama%C3%B1o&style=plastic)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ZegameusCompanyNetwork/Consola-basica-con-comandos/master?color=68f78e&style=plastic)
 Esta consola está desarrollada en C# y es muy simple de modificicar así como de ampliar con tus propias funcionalidades.
 
 Las funcionalidades básicas que dispone en esta versión son:
