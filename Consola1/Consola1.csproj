@@ -81,6 +81,9 @@
   <PropertyGroup>
     <ApplicationIcon>cmd_IDI_APPICON.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Consola.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -123,5 +126,6 @@
   <ItemGroup>
     <Content Include="cmd_IDI_APPICON.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
