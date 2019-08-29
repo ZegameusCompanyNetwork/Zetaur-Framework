@@ -28,7 +28,7 @@ namespace Consola
                     double Fahrenheit = Convert.ToDouble(Console.ReadLine());//Hacemos que el usuario introduzca una cantidad por la consola, y obligamos a convertirla a double.
                     //En caso de no poder por el motivo que sea, pasaremos al bloque catch.
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_conversor.OpFarcel(Fahrenheit);
+                    Op_Temp.OpFarcel(Fahrenheit);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))//Aquí creamos un encapsulador que en caso de error va a comprobar que el tipo de excepción producida no sea FormatException.
                 //Y en caso de que sea FormatException, el programa ejecutara el código del catch que contenga el argumento FormatException 
@@ -76,7 +76,7 @@ namespace Consola
                 {
                     double Celsisus = Convert.ToDouble(Console.ReadLine());//Hacemos que la entrada en consola se combierta a Double para poder hacer operaciones aritméticas
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm); //Mostramos en pantalla la fórmula utilizada, donde {0} es la cadena Frm
-                    Op_conversor.OpCelFahr(Celsisus);
+                    Op_Temp.OpCelFahr(Celsisus);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -124,7 +124,7 @@ namespace Consola
                     Console.WriteLine("Introduce una temperatura en Grados Celsius a calcular");
                     double Celsius = Convert.ToDouble(Console.ReadLine());
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_conversor.OpCelKel(Celsius);//Llamamos a la funcion de calcular dando el valor introducido
+                    Op_Temp.OpCelKel(Celsius);//Llamamos a la funcion de calcular dando el valor introducido
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -166,7 +166,7 @@ namespace Consola
                     Console.WriteLine("Introduce una temperatura en Kelvins a calcular");
                     double kelvin = Convert.ToDouble(Console.ReadLine());
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_conversor.OpKelCel(kelvin);
+                    Op_Temp.OpKelCel(kelvin);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -208,7 +208,7 @@ namespace Consola
                     Console.WriteLine("Introduce una temperatura en grados Fahrenheit a calcular");
                     double fahr = Convert.ToDouble(Console.ReadLine());
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_conversor.OpFahrKel(fahr);
+                    Op_Temp.OpFahrKel(fahr);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -220,7 +220,7 @@ namespace Consola
                     Console.WriteLine(e.Message + "\n");
                 }
                 Console.WriteLine(Rp);
-                go:
+            go:
                 string go = Console.ReadLine();
                 if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                 {
@@ -250,7 +250,7 @@ namespace Consola
                     Console.WriteLine("Introduce una temperatura en Kelvins a calcular");
                     double kelvin = Convert.ToDouble(Console.ReadLine());
                     Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_conversor.OpKelFahr(kelvin);
+                    Op_Temp.OpKelFahr(kelvin);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -293,7 +293,7 @@ namespace Consola
                 try
                 {
                     double km = Convert.ToDouble(Console.ReadLine());
-                    Op_conversor.OpKmMMN(km);
+                    Op_Long.OpKmMMN(km);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -331,7 +331,7 @@ namespace Consola
                 try
                 {
                     double Millas = Convert.ToDouble(Console.ReadLine());
-                    Op_conversor.OpMKm(Millas);
+                    Op_Long.OpMKm(Millas);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -369,7 +369,7 @@ namespace Consola
                 try
                 {
                     double MNau = Convert.ToDouble(Console.ReadLine());
-                    Op_conversor.OpMnKm(MNau);
+                    Op_Long.OpMnKm(MNau);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -409,7 +409,7 @@ namespace Consola
                 try
                 {
                     double Millas = Convert.ToDouble(Console.ReadLine());
-                    Op_conversor.OpM_MN(Millas);
+                    Op_Long.OpM_MN(Millas);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -447,10 +447,15 @@ namespace Consola
                 try
                 {
                     double Millas_Nau = Convert.ToDouble(Console.ReadLine());
-                    Op_conversor.OpMN_M(Millas_Nau);
+                    Op_Long.OpMN_M(Millas_Nau);
                 }
-                catch (Exception e)
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("El valor introducido no es númerico");
                     Console.WriteLine(e.Message + "\n");
                 }
                 Console.Write(reop);
@@ -463,6 +468,162 @@ namespace Consola
                 else if (go.ToUpper() == "N")
                 {
                     rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
+                }
+            }
+        }
+        #endregion
+        #region Km-Yd
+        public static void KM_Yd()
+        {
+            bool rep = true;
+            while (rep)
+            {
+                Console.Write("Inserte una cantidad para convertir a Yardas: ");
+                try
+                {
+                    double KM = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpKmYd(KM);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("El valor introducido no es númerico");
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.Write(reop);
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
+                }
+            }
+        }
+        public static void Yd_Km()
+        {
+            bool rep = true;
+            while (rep)
+            {
+                Console.Write("Inserte una cantidad para convertir a kilometros: ");
+                try
+                {
+                    double Yardas = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpYdKm(Yardas);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("El valor introducido no es númerico");
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.Write(reop);
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")
+                {
+                    rep = true;
+                }else if(go.ToUpper() == "N")
+                {
+                    rep = false;
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
+                }
+            }
+        }
+        #endregion
+        #region M-Pie
+        public static void M_Pie()
+        {
+            bool rep = true;
+            while (rep)
+            {
+                Console.Write("Inserte una cantidad para convertir a Pies: ");
+                try
+                {
+                    double Metros = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpMPie(Metros);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("El valor introducido no es númerico");
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.Write(reop);
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")
+                {
+                    rep = true;
+
+                }else if (go.ToUpper() == "N")
+                {
+                    rep = false;
+                }
+                else
+                {
+                    Console.WriteLine(sorn);
+                    goto go;
+                }
+            }
+        }
+        public static void Pie_M()
+        {
+            bool rep = true;
+            while (rep)
+            {
+                Console.Write("Inserte una cantidad para convertir a Pies: ");
+                try
+                {
+                    double Pie = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpPieM(Pie);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("El valor introducido no es númerico");
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.Write(reop);
+            go:
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")
+                {
+                    rep = true;
+
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    rep = false;
                 }
                 else
                 {

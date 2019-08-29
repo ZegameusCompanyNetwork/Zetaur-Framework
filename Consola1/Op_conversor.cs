@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿/*#########################################################
+ *#    Copyright 2019 Zegameus Company Network Records    #
+ *#                     Licencia MIT                      #
+ *#########################################################
+ */
+using System;
+//Vamos a separar las clases dependiendo de la unidad a convertir
 namespace Consola
 {
-    class Op_conversor
+    class Op_Temp
     {
         #region Temperatura
         #region Celsius-Fahrenheit
@@ -46,13 +47,16 @@ namespace Consola
         }
         #endregion
         #endregion
+    }
+    class Op_Long
+    {
         #region Longitud
         #region Kilometros-Millas-M.Náuticas
-        public static void OpKmMMN (double km)
+        public static void OpKmMMN(double km)
         {
             double millas = km / 1.609;
             double m_nautica = km / 1.852;
-            Console.WriteLine("{0}km son {1} millas y {2} millas náuticas",km, millas, m_nautica);//Devolvemos el resultado
+            Console.WriteLine("{0}km son {1} millas y {2} millas náuticas", km, millas, m_nautica);//Devolvemos el resultado
             Console.WriteLine("Para convertir de kilometros a millas se divide entre 1.609 y entre 1.852 si es para millas náuticas");//Explicación al usuario
         }
         public static void OpMKm(double Millas)
@@ -64,7 +68,7 @@ namespace Consola
         public static void OpMnKm(double Millas_nauticas)
         {
             double km = Millas_nauticas * 1.852;
-            Console.WriteLine("{0} millas náuticas son {1}km",Millas_nauticas,km);//Devolvemos el resultado
+            Console.WriteLine("{0} millas náuticas son {1}km", Millas_nauticas, km);//Devolvemos el resultado
             Console.WriteLine("Para convertir de millas náuticas a kilometros se multiplica por 1.852");//Explicación al usuario
         }
         public static void OpM_MN(double Millas)
@@ -78,6 +82,33 @@ namespace Consola
             double Millas = Millas_nauticas * 1.151;
             Console.WriteLine("{0} millas náuticas son {1} millas", Millas_nauticas, Millas);//Devolvemos el resultado
             Console.WriteLine("Para convertir de millas náuticas a millas se multiplica por 1.151");//Explicación al usuario
+        }
+        #endregion
+        #region Kilómetros-Yardas
+        public static void OpKmYd(double Km)
+        {
+            double Yd = Km * 1093.613;
+            Console.WriteLine("{0}Km son {1} yardas", Km, Yd);
+            Console.WriteLine("Para pasar de Kilometros a Yardas se multiplica por 1093.613 los Km.");
+        }
+        public static void OpYdKm(double Yd)
+        {
+            double Km = Yd / 1093.613;
+            Console.WriteLine("{0} Yardas son {1}Km",Yd,Km);
+            Console.WriteLine("Para pasar de Yd a Km se divide entre 1093.613 las Yd.");
+        }
+        #endregion
+        #region M - Pie
+        public static void OpMPie(double M)
+        {
+            double Pie = M * 3.281;
+            Console.WriteLine("{0} metros son {1} pies",M,Pie);
+            Console.WriteLine("Para obtener un valor aproximado se multiplican los metros por 3.281");
+        }
+        public static void OpPieM(double Pie)
+        {
+            double M = Pie / 3.281;
+            Console.WriteLine("{0} pies son {1} metros",Pie,M);
         }
         #endregion
         #endregion
