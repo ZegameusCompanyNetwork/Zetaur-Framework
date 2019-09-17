@@ -23,16 +23,16 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
-    <UpdateUrl>http://localhost:8080/</UpdateUrl>
+    <UpdateUrl>https://github.com/ZegameusCompanyNetwork/Consola-basica-con-comandos/releases/</UpdateUrl>
     <TargetCulture>es-ES</TargetCulture>
     <ProductName>ZCNR-CA-PRB</ProductName>
     <PublisherName>Zegameus Company Network Records</PublisherName>
     <SuiteName>ZCNR-Console-APP</SuiteName>
-    <MinimumRequiredVersion>1.0.0.1</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.6.0</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.0.6.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

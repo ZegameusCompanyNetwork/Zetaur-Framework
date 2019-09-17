@@ -102,13 +102,31 @@ namespace Consola
         public static void OpMPie(double M)
         {
             double Pie = M * 3.281;
-            Console.WriteLine("{0} metros son {1} pies",M,Pie);
+            Console.WriteLine("{0} metros son {1} pies.",M,Pie);
             Console.WriteLine("Para obtener un valor aproximado se multiplican los metros por 3.281");
         }
         public static void OpPieM(double Pie)
         {
             double M = Pie / 3.281;
             Console.WriteLine("{0} pies son {1} metros",Pie,M);
+            Console.WriteLine("Para obtener un valor aproximado se dividen los pies entre 3.281");
+        }
+        #endregion
+        #region Millas-Yardas
+        public static void OpMMNYd(double Millas)
+        {
+            double Yd = Millas * 1760;
+            double Yd1 = Millas * 2025.372;
+            Console.WriteLine("{0} millas son {1} yardas.",Millas,Yd);
+            Console.WriteLine("{0} millas náuticas son {1} yardas",Millas,Yd1);
+            Console.WriteLine("Para obtener un valor aproximado se multiplican las millas por 1760 para obtener Yardas.\nO se multiplican las millas náuticas por 2025.372 para obtener yardas.");
+        }
+        public static void OpYdMMN(double Yardas)
+        {
+            double Millas = Yardas / 1760;
+            double MiNa = Yardas / 2025.372;
+            Console.WriteLine("{0} yardas son {1} millas y {2} millas náuticas.", Yardas, Millas, MiNa);
+            Console.WriteLine("Para obtener un valor aproximado se dividen las yardas entre 1760 para obtener Millas.\nY entre 2025.372 para obtener las millas náuticas.");
         }
         #endregion
         #endregion

@@ -136,6 +136,8 @@ namespace Consola
             Console.WriteLine("{0}: Para convertir de millas a millas náuticas.\n{1}: Para convertir de millas náuticas a millas.", c[3], c[4]);
             Console.WriteLine("{0}: Para convertir de Km a Yardas.\n{1}: Para convertir de Yardas a Km.\n{2}: Para convertir Metros a Pies.", c[5], c[6], c[7]);
             Console.WriteLine("{0}: Para convertir de Pies a Metros.\nvolver: Para volver al menú principal del conversor", c[8]);
+            
+            #region if-else
             string i = Console.ReadLine();
             if (i == Convert.ToString(c[0]))//Utilizamos Convert.ToString para poder compararlo con i, ya que la entrada de volver es solo texto
             {
@@ -192,6 +194,7 @@ namespace Consola
                 Console.WriteLine("\nComando no encontrado, compruebe su ortografía.");
                 goto init;
             }
+            #endregion
         }
         #endregion
         #region Submenú masa
