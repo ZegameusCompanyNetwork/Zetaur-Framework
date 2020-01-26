@@ -62,13 +62,13 @@ namespace Consola
         public static void Tmp_cmd()
         {
         init:
-            int[] tmp = new int[7] { 1, 2, 3, 4, 5, 6, 7 };
+            int[] tmp = new int[4] { 1, 2, 3, 4};
             Console.WriteLine("\nSección de conversión de temperatura");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("\nComandos disponibles:\n{0}: Para convertir de Celsius a Fahrenheit.\n{1}: Para convertir de Fahrenheit a Celsius.", tmp[0], tmp[1]);
-            Console.WriteLine("{0}: Para convertir de Celsius a Kelvins.\n{1}: Para convertir de Kelvins a Celsius.", tmp[2], tmp[3]);
-            Console.WriteLine("{0}: Para convertir de Fahrenheit a Kelvins.\n{1}: Para convertir de Kelvin a Fahrenheit.", tmp[4], tmp[5]);
-            Console.Write("{0} para volver atras.\n>>", tmp[6]);
+            Console.WriteLine("\nComandos disponibles:\n{0}: Para convertir de Celsius a Fahrenheit y a Kelvins.\n{1}: Para convertir de Fahrenheit a Celsius y a Kelvins.", tmp[0], tmp[1]);
+            Console.WriteLine("{0}: Para convertir de Kelvins a Celsius y a Fahrenheit.", tmp[2]);
+            Console.Write("{0} para volver atras.\n>>", tmp[3]);
+            Console.ForegroundColor = ConsoleColor.Green;
             int input = 0;
             try
             {
@@ -80,41 +80,26 @@ namespace Consola
             }
             catch (FormatException e)
             {
-                Console.WriteLine("El valor introducizo no es numérico, se iniciara el conversor ºC a ºF(Es el predeterminado)");
+                Console.WriteLine("El valor introducizo no es numérico, se iniciara el conversor ºC a ºF y a K(Es el predeterminado)");
                 Console.WriteLine(e.Message);
             }
 
-            if (input == tmp[0])
+            if (input == tmp[0])//Celsius a Fahrenheits y a Kelvins
             {
-                Transformador.CelFahr();
+                Transformador.CelFahrKel();
                 goto init;
             }
-            else if (input == tmp[1])
+            else if (input == tmp[1]) //Fahrenheits a Celsius y Kelvins
             {
-                Transformador.FahrCel();
+                Transformador.FahrKelCel();
                 goto init;
             }
-            else if (input == tmp[2])
+            else if (input == tmp[2])//Kelvins a Celsius y a Fahrenheits
             {
-                Transformador.CelKel();
+                Transformador.KelCelFahr();
                 goto init;
             }
             else if (input == tmp[3])
-            {
-                Transformador.KelCel();
-                goto init;
-            }
-            else if (input == tmp[4])
-            {
-                Transformador.FahrKel();
-                goto init;
-            }
-            else if (input == tmp[5])
-            {
-                Transformador.KelFahr();
-                goto init;
-            }
-            else if (input == tmp[6])
             {
                 Console.ForegroundColor = ConsoleColor.Green;//Cambiamos el color para volver atras y restablecerlo
             }

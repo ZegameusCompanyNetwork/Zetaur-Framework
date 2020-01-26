@@ -9,43 +9,29 @@ namespace Consola
 {
     class Op_Temp
     {
-        #region Temperatura
-        #region Celsius-Fahrenheit
-        public static void OpCelFahr(double cels) //Necesitamos un valor para poder hacer la operación, por eso ponemos en el párentesis el tipo de valor y un nombre para poder usarlo más tarde
+        #region Celsius-Fahr-Kel
+        public static void OpCelFahrKel(double cels)
         {
             double fahr = (cels * 9 / 5) + 32; //Establecemos un valor para los grados Fahrenheit y la operación oportuna para transformarlos de grados Celsius a Fahrenheit
-            Console.WriteLine(fahr); //Imprimimos en pantalla el valor en Fahrenheit
-        }
-        public static void OpFarcel(double fahr)
-        {
-            double cels = (fahr - 32) * 5 / 9;
-            Console.WriteLine("Son {0}ºC", cels);
+            double kel = cels + 273.15;//Importante el punto es la coma en programación cuando hablamos de nº decimales
+            Console.WriteLine("{0}ºC son {1}ºF y {2} kelvins",cels,fahr,kel); //Imprimimos en pantalla el valor en Fahrenheit y Kelvins
         }
         #endregion
-        #region Celsius-Kelvin
-        public static void OpCelKel(double celsius)
+        #region Fahr-Celsius-Kel
+        public static void OpFahrCelKel(double fahr)
         {
-            double kelvin = celsius + 273.15; //Importante el punto es la coma en numeros decimales en la programación
-            Console.WriteLine("Son {0}K", kelvin); //Imprimimos el valor en pantalla seguido de su unidad
+            double cels = (fahr - 32) * 5 / 9;//Importante restar primero
+            double kel = (fahr - 32) * 5 / 9 + 273.15;
+            Console.WriteLine("{0}ºF son {1}ºC y {2} kelvins", fahr,cels,kel);
         }
-        public static void OpKelCel(double kelvin)
+        #endregion
+        #region Kelvins
+        public static void OpKelFahrCels(double kelvin)
         {
             double cels = kelvin - 273.15;
-            Console.WriteLine("Son {0}ºC", cels);
-        }
-        #endregion
-        #region Fahrenheit-Kelvin
-        public static void OpFahrKel(double fahrenheit)
-        {
-            double kelvin = (fahrenheit - 32) * 5 / 9 + 273.15;//Importante el punto es la coma en numeros decimales en la programación
-            Console.WriteLine("Son {0}K", kelvin);//K es la abreviatura de Kelvins
-        }
-        public static void OpKelFahr(double kelvin)
-        {
             double fahr = (kelvin - 273.15) * 9 / 5 + 32;
-            Console.WriteLine("Son {0}ºF", fahr);
+            Console.WriteLine("{0} kelvins son {1}ºC y {2}ºF",kelvin,cels,fahr);
         }
-        #endregion
         #endregion
     }
     class Op_Long

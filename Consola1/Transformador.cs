@@ -10,25 +10,28 @@ namespace Consola
 {
     class Transformador
     {
-        const string FrmExc = "Usted ha introducido un valor no númerico, por favor introduzca un número";//Declaro una constante para cuando el usuario cometa un excepción de tipo FormatException, más info abajo
-        const string Rp = "Otra temperatura que calcular? S/N: ";//Vamos a ahorrar espacio creando una constante para las repeticiones, en este caso para temperatura
-        const string reop = "Otra medida a convertir (S/N): ";//Y en este para las medidas de longitud
-        const string sorn = "¿A introducido usted el valor adecuado?";//y esta para el S/N de continuar los bucles
+        private const string FrmExc = "Usted ha introducido un valor no númerico, por favor introduzca un número";//Declaro una constante para cuando el usuario cometa un excepción de tipo FormatException, más info abajo
+        private const string Rp = "Otra temperatura que calcular? S/N: ";//Vamos a ahorrar espacio creando una constante para las repeticiones, en este caso para temperatura
+        private const string reop = "Otra medida a convertir (S/N): ";//Y en este para las medidas de longitud
+        private const string vlno = "¿A introducido usted el valor adecuado?";//y esta para el S/N de continuar los bucles en caso de valor no admitido
+        private const string frmcv = "La formula para convertir de";
+        private static readonly string[] temps = { "Celsius", "Fahrenheit", "Kelvins" };//para poder usar el array tenemos que ponerlo como static y para evitar su modificación lo ponemos como readonly
+        private static readonly string[] frms = { "ºC = (ºF - 32) * 5 / 9", "ºC = K -273.15", "K = ºC + 273.15", "K = (ºF - 32) * 5 / 9 + 273.15", "ºF = (ºC * 5 / 9) + 32", "ºF = (K - 273.15) * 9 / 5 + 32" };
         #region Temperatura
-        #region Fahrenheit a Celsius
-        public static void FahrCel()
+        #region Celsius-Fahrenheits-Kelvins
+        public static void CelFahrKel()
         {
             bool rep = true; //Declaramos un booleano en condicion true para poder ejecutar un while a continuación
-            const string Frm = "ºC = (ºF - 32) * 5 / 9";
             while (rep)
             {
-                Console.WriteLine("Introduzca una temperatura en grados Fahrenheit a calcular:\n>>");
+                Console.WriteLine("Introduzca una temperatura en grados celsius a convertir:\n>>");
                 try
                 {
-                    double Fahrenheit = Convert.ToDouble(Console.ReadLine());//Hacemos que el usuario introduzca una cantidad por la consola, y obligamos a convertirla a double.
+                    double cels = Convert.ToDouble(Console.ReadLine());//Hacemos que el usuario introduzca una cantidad por la consola, y obligamos a convertirla a double.
                     //En caso de no poder por el motivo que sea, pasaremos al bloque catch.
-                    Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_Temp.OpFarcel(Fahrenheit);
+                    Console.WriteLine("\n{0} {1} a {2} es: {3}", frmcv, temps[0], temps[1], frms[4]);//Para ahorrar espacio utilizamos variables para acortar el código
+                    Console.WriteLine("{0} {1} a {2} es: {3}", frmcv, temps[0], temps[2], frms[2]);
+                    Op_Temp.OpCelFahrKel(cels);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))//Aquí creamos un encapsulador que en caso de error va a comprobar que el tipo de excepción producida no sea FormatException.
                 //Y en caso de que sea FormatException, el programa ejecutara el código del catch que contenga el argumento FormatException 
@@ -57,158 +60,26 @@ namespace Consola
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
 
         }
         #endregion
-        #region Celsisus a Fahrenheit
-        public static void CelFahr()
+        #region Fahrenheits-Celsius-Kelvins
+        public static void FahrKelCel()
         {
-            bool rep = true; //Declaramos un booleano en condicion true para poder ejecutar un while a continuación
+            bool rep = true; 
             while (rep)
             {
-                const string Frm = "ºF = (ºC x 9 / 5) + 32";//Declaramos un string con la fórmula utilizada
-                Console.WriteLine("Introduzca una temperatura en grados Celsius a calcular");
+                Console.WriteLine("Introduzca una temperatura en {0} a convertir:\n>>", temps[1]);//Entrada en Farhenheit
                 try
                 {
-                    double Celsisus = Convert.ToDouble(Console.ReadLine());//Hacemos que la entrada en consola se combierta a Double para poder hacer operaciones aritméticas
-                    Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm); //Mostramos en pantalla la fórmula utilizada, donde {0} es la cadena Frm
-                    Op_Temp.OpCelFahr(Celsisus);
-                }
-                catch (Exception e) when (e.GetType() != typeof(FormatException))
-                {
-                    Console.WriteLine(e.Message + "\n"); //Imprimios la excepcion en caso de haber algún error (Por parte del usuario)
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
-                }
-                Console.Write(Rp);
-            /*Creamos una condicion if, sin else, ya que este último vendría siendo el while; para mostrar en pantalla la cadena "go"
-             con la instrucción go.ToUpper() hacemos que el valor introducido se combierta a mayúsculas, y si no es igual a S (!= "S") hace que el bool rep
-            sea false, finalizando el bucle while
-            */
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
-                {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(sorn);
-                    goto go;
-                }
-            }
-        }
-
-        #endregion
-        #region Celsius-Kelvin
-        public static void CelKel()
-        {
-            bool rep = true;
-            const string Frm = "K= ºC + 273.15";
-            while (rep)
-            {
-                try
-                {
-
-                    Console.WriteLine("Introduce una temperatura en Grados Celsius a calcular");
-                    double Celsius = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_Temp.OpCelKel(Celsius);//Llamamos a la funcion de calcular dando el valor introducido
-                }
-                catch (Exception e) when (e.GetType() != typeof(FormatException))
-                {
-                    Console.WriteLine(e.Message + "\n");
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
-                }
-                Console.WriteLine(Rp);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
-                {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(sorn);
-                    goto go;
-                }
-            }
-        }
-        #endregion
-        #region Kelvins-Celsius
-        public static void KelCel()
-        {
-            bool rep = true;
-            const string Frm = "ºC = K - 273.15";
-            while (rep)
-            {
-                try
-                {
-                    Console.WriteLine("Introduce una temperatura en Kelvins a calcular");
-                    double kelvin = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_Temp.OpKelCel(kelvin);
-                }
-                catch (Exception e) when (e.GetType() != typeof(FormatException))
-                {
-                    Console.WriteLine(e.Message + "\n");
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
-                }
-                Console.WriteLine(Rp);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
-                {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(sorn);
-                    goto go;
-                }
-            }
-        }
-        #endregion
-        #region Fahrenheit-Kelvin
-        public static void FahrKel()
-        {
-            bool rep = true;
-            const string Frm = "K = (ºF - 32) * 5 / 9 + 273.15";
-            while (rep)
-            {
-                try
-                {
-                    Console.WriteLine("Introduce una temperatura en grados Fahrenheit a calcular");
                     double fahr = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_Temp.OpFahrKel(fahr);
+                    Console.WriteLine("\n{0} {1} a {2} es: {3}", frmcv, temps[1], temps[0], frms[0]);
+                    Console.WriteLine("{0} {1} a {2} es: {3}", frmcv, temps[0], temps[2], frms[3]);
+                    Op_Temp.OpFahrCelKel(fahr);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -222,35 +93,36 @@ namespace Consola
                 Console.WriteLine(Rp);
             go:
                 string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                if (go.ToUpper() == "S")
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                    rep = true;
                 }
                 else if (go.ToUpper() == "N")
                 {
-                    rep = false;//Cambiamos de true a false
+                    rep = false;
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
+
         }
         #endregion
-        #region Kelvin-Fahrenheit
-        public static void KelFahr()
+        #region Kelvins-Fahrenheits-Celsius
+        public static void KelCelFahr()
         {
-            bool rep = true;
-            const string Frm = "ºF = (K -273.15) * 9 / 5 + 32";
+            bool rep = true; 
             while (rep)
             {
+                Console.WriteLine("Introduzca una temperatura en {0} a convertir:\n>>", temps[2]);//Entrada en Kelvins
                 try
                 {
-                    Console.WriteLine("Introduce una temperatura en Kelvins a calcular");
-                    double kelvin = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("\nLa formula para realizar la conversión es: {0}", Frm);
-                    Op_Temp.OpKelFahr(kelvin);
+                    double kel = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("\n{0} {1} a {2} es: {3}", frmcv, temps[2], temps[0], frms[1]);
+                    Console.WriteLine("{0} {1} a {2} es: {3}", frmcv, temps[2], temps[1], frms[5]);
+                    Op_Temp.OpKelFahrCels(kel);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -264,20 +136,21 @@ namespace Consola
                 Console.WriteLine(Rp);
             go:
                 string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                if (go.ToUpper() == "S")
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                    rep = true;
                 }
                 else if (go.ToUpper() == "N")
                 {
-                    rep = false;//Cambiamos de true a false
+                    rep = false;
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
+
         }
         #endregion
         #endregion
@@ -317,7 +190,7 @@ namespace Consola
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
@@ -355,7 +228,7 @@ namespace Consola
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
@@ -393,7 +266,7 @@ namespace Consola
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
@@ -433,7 +306,7 @@ namespace Consola
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
@@ -471,7 +344,7 @@ namespace Consola
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
@@ -511,7 +384,7 @@ namespace Consola
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
@@ -542,13 +415,14 @@ namespace Consola
                 if (go.ToUpper() == "S")
                 {
                     rep = true;
-                }else if(go.ToUpper() == "N")
+                }
+                else if (go.ToUpper() == "N")
                 {
                     rep = false;
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
@@ -582,13 +456,14 @@ namespace Consola
                 {
                     rep = true;
 
-                }else if (go.ToUpper() == "N")
+                }
+                else if (go.ToUpper() == "N")
                 {
                     rep = false;
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
@@ -627,7 +502,7 @@ namespace Consola
                 }
                 else
                 {
-                    Console.WriteLine(sorn);
+                    Console.WriteLine(vlno);
                     goto go;
                 }
             }
