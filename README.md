@@ -15,3 +15,5 @@ Las funcionalidades básicas que dispone en esta versión son:
 > - Longitud (metros, kilometros, Millas y Millas Náuticas, Yardas y Pies)
 
 Dentro de poco se realizará una reducción de código para mejorar la calidad del programa.
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q210SP8)
