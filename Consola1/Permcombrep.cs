@@ -7,19 +7,19 @@ namespace Consola
         public void Factorial()
         {
         Inicio:
+            double num;//Para permitir la introducción de valores decimales
+            double res = 1;//Este es el valor de salida, (A de ser double para permitir decimales
+            Console.WriteLine("Calculadora de factoriales \n Inserta numero a factorizar:");
             try
             {
-                int obj1, res = 1;
+                num = double.Parse(Console.ReadLine());
 
-                Console.WriteLine("Calculadora de factoriales \n Inserta numero a factorizar:");
-                obj1 = int.Parse(Console.ReadLine());
-
-                for (int i = 1; i <= obj1; i++)
+                for (int i = 1; i <= num; i++)
                 {
                     res = res * i;
                 }
 
-                Console.WriteLine("El factorial de " + obj1 + " es: " + res);
+                Console.WriteLine("El factorial de {0} es: {1}",num, res);
             }
             catch(ArgumentException e)
             {

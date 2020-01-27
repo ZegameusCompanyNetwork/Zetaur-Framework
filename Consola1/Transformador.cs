@@ -70,7 +70,7 @@ namespace Consola
         #region Fahrenheits-Celsius-Kelvins
         public static void FahrKelCel()
         {
-            bool rep = true; 
+            bool rep = true;
             while (rep)
             {
                 Console.WriteLine("Introduzca una temperatura en {0} a convertir:\n>>", temps[1]);//Entrada en Farhenheit
@@ -113,7 +113,7 @@ namespace Consola
         #region Kelvins-Fahrenheits-Celsius
         public static void KelCelFahr()
         {
-            bool rep = true; 
+            bool rep = true;
             while (rep)
             {
                 Console.WriteLine("Introduzca una temperatura en {0} a convertir:\n>>", temps[2]);//Entrada en Kelvins
@@ -156,17 +156,16 @@ namespace Consola
         #endregion
         #region Longitud
 
-        #region Kilometro-Milla-M.Náutica
-        public static void KmMll()
+        public static void CmdM()
         {
             bool rep = true;
             while (rep)
             {
-                Console.Write("Inserte una cantidad para convertir a Millas y Millas Náuticas: ");
+                Console.Write("Inserte una cantidad en metros a convertir: ");
                 try
                 {
-                    double km = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpKmMMN(km);
+                    double m = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpM(m);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -195,16 +194,16 @@ namespace Consola
                 }
             }
         }
-        public static void MKm()
+        public static void Cmdkm()
         {
             bool rep = true;
             while (rep)
             {
-                Console.Write("Inserte una cantidad para convertir a Kilómetros: ");
+                Console.Write("Inserte una cantidad en metros a convertir: ");
                 try
                 {
-                    double Millas = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpMKm(Millas);
+                    double km = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpKm(km);//Llamamos al método de kilometros
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -233,16 +232,16 @@ namespace Consola
                 }
             }
         }
-        public static void MNKm()
+        public static void CmdMi()
         {
             bool rep = true;
             while (rep)
             {
-                Console.Write("Inserte una cantidad para convertir a Kilómetros: ");
+                Console.Write("Inserte una cantidad en Millas a convertir: ");
                 try
                 {
-                    double MNau = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpMnKm(MNau);
+                    double Mi = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpMi(Mi);//Llamamos al método de Millas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -271,18 +270,16 @@ namespace Consola
                 }
             }
         }
-        #endregion
-        #region Millas-Millas Náuticas
-        public static void M_MN()
+        public static void CmdNmi()
         {
             bool rep = true;
             while (rep)
             {
-                Console.Write("Inserte una cantidad para convertir a Millas náuticas: ");
+                Console.Write("Inserte una cantidad en Millas náuticas a convertir: ");
                 try
                 {
-                    double Millas = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpM_MN(Millas);
+                    double Nmi = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpNmi(Nmi);//Llamamos al método de Millas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -295,6 +292,7 @@ namespace Consola
                 }
                 Console.Write(reop);
             go:
+                Console.Write(reop);
                 string go = Console.ReadLine();
                 if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                 {
@@ -302,6 +300,7 @@ namespace Consola
                 }
                 else if (go.ToUpper() == "N")
                 {
+                    Console.Clear();
                     rep = false;//Cambiamos de true a false
                 }
                 else
@@ -311,203 +310,6 @@ namespace Consola
                 }
             }
         }
-        public static void MN_M()
-        {
-            bool rep = true;
-            while (rep)
-            {
-                Console.Write("Inserte una cantidad para convertir a Millas: ");
-                try
-                {
-                    double Millas_Nau = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpMN_M(Millas_Nau);
-                }
-                catch (Exception e) when (e.GetType() != typeof(FormatException))
-                {
-                    Console.WriteLine(e.Message + "\n");
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine("El valor introducido no es númerico");
-                    Console.WriteLine(e.Message + "\n");
-                }
-                Console.Write(reop);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
-                {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
-                }
-            }
-        }
-        #endregion
-        #region Km-Yd
-        public static void KM_Yd()
-        {
-            bool rep = true;
-            while (rep)
-            {
-                Console.Write("Inserte una cantidad para convertir a Yardas: ");
-                try
-                {
-                    double KM = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpKmYd(KM);
-                }
-                catch (Exception e) when (e.GetType() != typeof(FormatException))
-                {
-                    Console.WriteLine(e.Message + "\n");
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine("El valor introducido no es númerico");
-                    Console.WriteLine(e.Message + "\n");
-                }
-                Console.Write(reop);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
-                {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
-                }
-            }
-        }
-        public static void Yd_Km()
-        {
-            bool rep = true;
-            while (rep)
-            {
-                Console.Write("Inserte una cantidad para convertir a kilometros: ");
-                try
-                {
-                    double Yardas = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpYdKm(Yardas);
-                }
-                catch (Exception e) when (e.GetType() != typeof(FormatException))
-                {
-                    Console.WriteLine(e.Message + "\n");
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine("El valor introducido no es númerico");
-                    Console.WriteLine(e.Message + "\n");
-                }
-                Console.Write(reop);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")
-                {
-                    rep = true;
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
-                }
-            }
-        }
-        #endregion
-        #region M-Pie
-        public static void M_Pie()
-        {
-            bool rep = true;
-            while (rep)
-            {
-                Console.Write("Inserte una cantidad para convertir a Pies: ");
-                try
-                {
-                    double Metros = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpMPie(Metros);
-                }
-                catch (Exception e) when (e.GetType() != typeof(FormatException))
-                {
-                    Console.WriteLine(e.Message + "\n");
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine("El valor introducido no es númerico");
-                    Console.WriteLine(e.Message + "\n");
-                }
-                Console.Write(reop);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")
-                {
-                    rep = true;
-
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
-                }
-            }
-        }
-        public static void Pie_M()
-        {
-            bool rep = true;
-            while (rep)
-            {
-                Console.Write("Inserte una cantidad para convertir a Pies: ");
-                try
-                {
-                    double Pie = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpPieM(Pie);
-                }
-                catch (Exception e) when (e.GetType() != typeof(FormatException))
-                {
-                    Console.WriteLine(e.Message + "\n");
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine("El valor introducido no es númerico");
-                    Console.WriteLine(e.Message + "\n");
-                }
-                Console.Write(reop);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")
-                {
-                    rep = true;
-
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
-                }
-            }
-        }
-        #endregion
-        #endregion
     }
 }
+#endregion

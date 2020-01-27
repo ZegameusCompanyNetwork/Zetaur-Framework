@@ -14,7 +14,7 @@ namespace Consola
         {
             double fahr = (cels * 9 / 5) + 32; //Establecemos un valor para los grados Fahrenheit y la operación oportuna para transformarlos de grados Celsius a Fahrenheit
             double kel = cels + 273.15;//Importante el punto es la coma en programación cuando hablamos de nº decimales
-            Console.WriteLine("{0}ºC son {1}ºF y {2} kelvins",cels,fahr,kel); //Imprimimos en pantalla el valor en Fahrenheit y Kelvins
+            Console.WriteLine("{0}ºC son {1}ºF y {2} kelvins", cels, fahr, kel); //Imprimimos en pantalla el valor en Fahrenheit y Kelvins
         }
         #endregion
         #region Fahr-Celsius-Kel
@@ -22,7 +22,7 @@ namespace Consola
         {
             double cels = (fahr - 32) * 5 / 9;//Importante restar primero
             double kel = (fahr - 32) * 5 / 9 + 273.15;
-            Console.WriteLine("{0}ºF son {1}ºC y {2} kelvins", fahr,cels,kel);
+            Console.WriteLine("{0}ºF son {1}ºC y {2} kelvins", fahr, cels, kel);
         }
         #endregion
         #region Kelvins
@@ -30,91 +30,47 @@ namespace Consola
         {
             double cels = kelvin - 273.15;
             double fahr = (kelvin - 273.15) * 9 / 5 + 32;
-            Console.WriteLine("{0} kelvins son {1}ºC y {2}ºF",kelvin,cels,fahr);
+            Console.WriteLine("{0} kelvins son {1}ºC y {2}ºF", kelvin, cels, fahr);
         }
         #endregion
     }
     class Op_Long
     {
-        #region Longitud
-        #region Kilometros-Millas-M.Náuticas
-        public static void OpKmMMN(double km)
+        static readonly string[] longs = { "Metros (m)", "Kilómetros (Km)", "Millas (Mi)", "Millas Náuticas (Nmi)", "Pulgadas (in)", "Yardas (Yd)", "Pies (ft)" };
+        #region Metros-kilometros
+        public static void OpM(double m)
         {
+            //escribimos todas las formulas a ejecutar, importante ponerlas como doubles para poder tener decimales
+            double km = m / 1000;
+            double inc = m * 39.97;
             double millas = km / 1.609;
             double m_nautica = km / 1.852;
-            Console.WriteLine("{0}km son {1} millas y {2} millas náuticas", km, millas, m_nautica);//Devolvemos el resultado
-            Console.WriteLine("Para convertir de kilometros a millas se divide entre 1.609 y entre 1.852 si es para millas náuticas");//Explicación al usuario
+            double Yd = km * 1093.613;
+            double Pie = m * 3.281;
+            Console.WriteLine("{0} {1} son:\n{2} {3}.\n{4} {5} o {6} {7}.\n{8} {9}.\n{10} {11}.\n{12} {13}.", m, longs[0], km, longs[1], millas, longs[2], m_nautica, longs[3], inc, longs[3], Yd, longs[4], Pie, longs[5]);//Para reducir el texto de salida, creamos un formato de salida. Solo lo uso en este caso para mostrar 
         }
-        public static void OpMKm(double Millas)
+        public static void OpKm(double km)
         {
-            double km = Millas * 1.609;
-            Console.WriteLine("{0} millas son {1}km", Millas, km);//Devolvemos el resultado
-            Console.WriteLine("Para convertir de millas a kilometros se multiplica por 1.609");//Explicación al usuario
-        }
-        public static void OpMnKm(double Millas_nauticas)
-        {
-            double km = Millas_nauticas * 1.852;
-            Console.WriteLine("{0} millas náuticas son {1}km", Millas_nauticas, km);//Devolvemos el resultado
-            Console.WriteLine("Para convertir de millas náuticas a kilometros se multiplica por 1.852");//Explicación al usuario
-        }
-        public static void OpM_MN(double Millas)
-        {
-            double M_nau = Millas / 1.151;
-            Console.WriteLine("{0} millas son {1} millas náuticas", Millas, M_nau);//Devolvemos el resultado
-            Console.WriteLine("Para convertir de millas náuticas a millas se divide entre 1.151");//Explicación al usuario
-        }
-        public static void OpMN_M(double Millas_nauticas)
-        {
-            double Millas = Millas_nauticas * 1.151;
-            Console.WriteLine("{0} millas náuticas son {1} millas", Millas_nauticas, Millas);//Devolvemos el resultado
-            Console.WriteLine("Para convertir de millas náuticas a millas se multiplica por 1.151");//Explicación al usuario
+            double m = km * 1000;
+            double inc = km * 39370;
+            double millas = km / 1.609;
+            double m_nauticas = km / 1.852;
+            double Yd = m * 1093.613;
+            double Pie = m * 3.281;
+            Console.WriteLine("{0} Kilómetros son: {1} Metros (m).\n{2} Millas (Mi) o {3} Millas náuticas(Nmi).\n{4} Pulgadas (in).\n{5} Yardas (Yd).\n{6} Pies (ft).", km, m, millas, m_nauticas, inc, Yd, Pie);
         }
         #endregion
-        #region Kilómetros-Yardas
-        public static void OpKmYd(double Km)
+        #region Millas
+        public static void OpMi(double Mi)
         {
-            double Yd = Km * 1093.613;
-            Console.WriteLine("{0}Km son {1} yardas", Km, Yd);
-            Console.WriteLine("Para pasar de Kilometros a Yardas se multiplica por 1093.613 los Km.");
+            double m = Mi * 1609, km = Mi * 1.609, inc = Mi * 63360, nmi = Mi / 1.151, yd = Mi * 1760, Pie = Mi * 5280; //Para reducir espacio, denominamos a todos los valores de salida como doubles a traves de comas.
+            Console.WriteLine("{0} Millas son: {1} Millas Náuticas (Nmi).\n{2} Metros (m) o {3} Kilómetros.\n{4} Pulgadas (in).\n{5} Yardas (Yd).\n{6} Pies (ft).", Mi, nmi, m, km, inc, yd, Pie);
         }
-        public static void OpYdKm(double Yd)
+        public static void OpNmi(double Nmi)
         {
-            double Km = Yd / 1093.613;
-            Console.WriteLine("{0} Yardas son {1}Km",Yd,Km);
-            Console.WriteLine("Para pasar de Yd a Km se divide entre 1093.613 las Yd.");
+            double m = Nmi * 1852, km = Nmi * 1.852, inc = Nmi * 72913, mi = Nmi * 1.151, yd = Nmi * 2025.37, pie = Nmi * 6076.12;
+            Console.WriteLine("{0} {1} son:\n{2} {3}.\n{4} {5} o {6} {7}.\n{8} {9}.\n{10} {11}.\n{12} {13}.", Nmi, longs[3], mi,longs[2], m,longs[0], km,longs[1],inc, longs[4], yd,longs[5], pie, longs[6]);
         }
-        #endregion
-        #region M - Pie
-        public static void OpMPie(double M)
-        {
-            double Pie = M * 3.281;
-            Console.WriteLine("{0} metros son {1} pies.",M,Pie);
-            Console.WriteLine("Para obtener un valor aproximado se multiplican los metros por 3.281");
-        }
-        public static void OpPieM(double Pie)
-        {
-            double M = Pie / 3.281;
-            Console.WriteLine("{0} pies son {1} metros",Pie,M);
-            Console.WriteLine("Para obtener un valor aproximado se dividen los pies entre 3.281");
-        }
-        #endregion
-        #region Millas-Yardas
-        public static void OpMMNYd(double Millas)
-        {
-            double Yd = Millas * 1760;
-            double Yd1 = Millas * 2025.372;
-            Console.WriteLine("{0} millas son {1} yardas.",Millas,Yd);
-            Console.WriteLine("{0} millas náuticas son {1} yardas",Millas,Yd1);
-            Console.WriteLine("Para obtener un valor aproximado se multiplican las millas por 1760 para obtener Yardas.\nO se multiplican las millas náuticas por 2025.372 para obtener yardas.");
-        }
-        public static void OpYdMMN(double Yardas)
-        {
-            double Millas = Yardas / 1760;
-            double MiNa = Yardas / 2025.372;
-            Console.WriteLine("{0} yardas son {1} millas y {2} millas náuticas.", Yardas, Millas, MiNa);
-            Console.WriteLine("Para obtener un valor aproximado se dividen las yardas entre 1760 para obtener Millas.\nY entre 2025.372 para obtener las millas náuticas.");
-        }
-        #endregion
         #endregion
     }
 }

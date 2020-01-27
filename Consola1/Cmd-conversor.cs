@@ -116,58 +116,57 @@ namespace Consola
         init:
             int[] c = new int[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("\nComandos disponibles:\n{0}: Para convertir de Kilómetros a millas/millas náuticas.", c[0]);
-            Console.WriteLine("{0}: Para convertir de millas a km.\n{1}: Para convertir de Millas náuticas a Km.", c[1], c[2]);
-            Console.WriteLine("{0}: Para convertir de millas a millas náuticas.\n{1}: Para convertir de millas náuticas a millas.", c[3], c[4]);
-            Console.WriteLine("{0}: Para convertir de Km a Yardas.\n{1}: Para convertir de Yardas a Km.\n{2}: Para convertir Metros a Pies.", c[5], c[6], c[7]);
-            Console.WriteLine("{0}: Para convertir de Pies a Metros.\nvolver: Para volver al menú principal del conversor", c[8]);
+            Console.WriteLine("\nComandos disponibles:\n{0}: Para convertir Metros.", c[0]);
+            Console.WriteLine("{0}: Para convertir kilometros.\n{1}: Para convertir Millas.", c[1], c[2]);
+            Console.WriteLine("{0}: Para convertir Millas náuticas.\n{1}: Para convertir Yardas.", c[3], c[4]);
+            Console.WriteLine("{0}: Para convertir Pies.\nvolver: Para volver al menú principal del conversor",c[5]);
             
             #region if-else
             string i = Console.ReadLine();
             if (i == Convert.ToString(c[0]))//Utilizamos Convert.ToString para poder compararlo con i, ya que la entrada de volver es solo texto
             {
-                Transformador.KmMll();//Kilómetros - Millas
+                Transformador.CmdM();//Metros al resto
                 goto init;
             }
             else if (i == Convert.ToString(c[1]))
             {
-                Transformador.MKm();//Millas-Kilómetros
+                Transformador.Cmdkm();//Kilometros al resto
                 goto init;
             }
             else if (i == Convert.ToString(c[2]))
             {
-                Transformador.MNKm();//Millas Náuticas-Kilómetros
+                Transformador.CmdMi();//Millas
                 goto init;
             }
             else if (i == Convert.ToString(c[3]))
             {
-                Transformador.M_MN();//Millas-Millas Náuticas
+                Transformador.CmdNmi();//Millas-Millas Náuticas
                 goto init;
             }
-            else if (i == Convert.ToString(c[4]))
-            {
-                Transformador.MN_M();//Millas Náuticas-Millas
-                goto init;
-            }
-            else if (i == Convert.ToString(c[5]))//Km - Yardas
-            {
-                Transformador.KM_Yd();
-                goto init;
-            }
-            else if (i == Convert.ToString(c[6]))//Yardas - Km
-            {
-                Transformador.Yd_Km();
-                goto init;
-            }
-            else if(i == Convert.ToString(c[7]))
-            {
-                Transformador.M_Pie();//Metros - Pie
-            }
-            else if (i == Convert.ToString(c[8]))
-            {
-                Transformador.Pie_M();//Pie - Metros
-                goto init;
-            }
+            //else if (i == Convert.ToString(c[4]))
+            //{
+            //    Transformador.MN_M();//Millas Náuticas-Millas
+            //    goto init;
+            //}
+            //else if (i == Convert.ToString(c[5]))//Km - Yardas
+            //{
+            //    Transformador.KM_Yd();
+            //    goto init;
+            //}
+            //else if (i == Convert.ToString(c[6]))//Yardas - Km
+            //{
+            //    Transformador.Yd_Km();
+            //    goto init;
+            //}
+            //else if(i == Convert.ToString(c[7]))
+            //{
+            //    Transformador.M_Pie();//Metros - Pie
+            //}
+            //else if (i == Convert.ToString(c[8]))
+            //{
+            //    Transformador.Pie_M();//Pie - Metros
+            //    goto init;
+            //}
             else if (i.ToLower() == "volver")//Vamos a ordenar que el texto de entrada sea transformado en minusculas
             {
                 Console.Clear();
