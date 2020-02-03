@@ -72,5 +72,21 @@ namespace Consola
             Console.WriteLine("{0} {1} son:\n{2} {3}.\n{4} {5} o {6} {7}.\n{8} {9}.\n{10} {11}.\n{12} {13}.", Nmi, longs[3], mi,longs[2], m,longs[0], km,longs[1],inc, longs[4], yd,longs[5], pie, longs[6]);
         }
         #endregion
+        #region Pulgadas-Yardas-Pies
+        public static void OpInc(double Inc){
+            double m = Inc / 39.97, km = Inc / 39970, mi = Inc / 63360, Nmi = Inc / 72913, yd = 36, pie = Inc / 12;
+            Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.", Inc,longs[4],m,longs[0],km,longs[1],mi,longs[2],Nmi,longs[3],yd,longs[5],pie,longs[6]);
+        }
+        public static void OpYd(double Yd)
+        {
+            double m = Yd / 1.094, km = m / 1000, Mi = Yd / 1760, Nmi = Yd / 2025, Inc = Yd * 36, pie = Yd * 3;
+            Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.", Yd,longs[5],m,longs[0],km,longs[1],Mi,longs[2],Nmi,longs[3],Inc,longs[4],pie,longs[6]);
+        }
+        public static void OpPie (double pie) 
+        {
+            double m = pie / 3.281,km = m /1000, Mi = pie / 5280,Nmi = pie / 6076,Inc = pie * 12, Yd = pie /3;
+            Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.", pie,longs[6],m,longs[0],km,longs[1],Mi,longs[2],Nmi,longs[3],Inc,longs[4],Yd,longs[5]);
+        }
+        #endregion
     }
 }

@@ -45,13 +45,15 @@ namespace Consola
             else if(Cmd.ToLower()==cmnd[5])
             {
                 Console.WriteLine("Hora y Fecha: {0}\n", DateTime.Now);// Esto nos imprime la hora y la fecha en consola
+                Console.WriteLine("Hora y Fecha personalizado: {0}\n", DateTime.Now.ToString("hh:mm:ss.fff dd-MM-yy")); //Aquí podemos establecer como se va ha mostrar la hora
+                Console.WriteLine("Hora y Fecha - UTC: {0}\n", DateTime.UtcNow.ToString("hh:mm:ss.fff dd/MM/yyyy"));//Las 3 f son para los milisegundos
                 Console.WriteLine("Solo la hora: {0}\n", DateTime.Now.ToString("hh:mm:ss")); //Esto nos imprime solo la hora
-                Console.WriteLine("Solo la Fecha: {0}\n", DateTime.Now.ToString("dd/MM/yyyy")); //Esto nos imprime solo la fecha
-                Console.ReadKey();
+                Console.Write("Solo la Fecha: {0}\n", DateTime.Now.ToString("dd/MM/yyyy")); //Esto nos imprime solo la fecha
                 goto init;
             }
             else if(Cmd.ToLower()==cmnd[6])
             {
+                
                 Permcombrep perm = new Permcombrep();
                 perm.Factorial();
                 goto init;

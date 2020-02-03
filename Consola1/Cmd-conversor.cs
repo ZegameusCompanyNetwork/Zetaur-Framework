@@ -114,12 +114,13 @@ namespace Consola
         public static void Long_cmd()
         {
         init:
-            int[] c = new int[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            sbyte[] c = new sbyte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };//Utilizamos sbyte en vez de int porque utilizamos valores pequeños y no es necesario reservar mucho espacio en la memoria RAM, estos valores van de -128 a 127, por lo que aún nos sobra.
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\nComandos disponibles:\n{0}: Para convertir Metros.", c[0]);
             Console.WriteLine("{0}: Para convertir kilometros.\n{1}: Para convertir Millas.", c[1], c[2]);
-            Console.WriteLine("{0}: Para convertir Millas náuticas.\n{1}: Para convertir Yardas.", c[3], c[4]);
-            Console.WriteLine("{0}: Para convertir Pies.\nvolver: Para volver al menú principal del conversor",c[5]);
+            Console.WriteLine("{0}: Para convertir Millas náuticas.\n{1}: Para convertir Pulgadas.", c[3], c[4]);
+            Console.WriteLine("{0}: Para convertir Yardas.\n{1}: Para convertir Pies",c[5],c[6]);
+            Console.WriteLine("{0}: Para volver al menú principal del conversor",c[7]);
             
             #region if-else
             string i = Console.ReadLine();
@@ -143,31 +144,22 @@ namespace Consola
                 Transformador.CmdNmi();//Millas-Millas Náuticas
                 goto init;
             }
-            //else if (i == Convert.ToString(c[4]))
-            //{
-            //    Transformador.MN_M();//Millas Náuticas-Millas
-            //    goto init;
-            //}
-            //else if (i == Convert.ToString(c[5]))//Km - Yardas
-            //{
-            //    Transformador.KM_Yd();
-            //    goto init;
-            //}
-            //else if (i == Convert.ToString(c[6]))//Yardas - Km
-            //{
-            //    Transformador.Yd_Km();
-            //    goto init;
-            //}
-            //else if(i == Convert.ToString(c[7]))
-            //{
-            //    Transformador.M_Pie();//Metros - Pie
-            //}
-            //else if (i == Convert.ToString(c[8]))
-            //{
-            //    Transformador.Pie_M();//Pie - Metros
-            //    goto init;
-            //}
-            else if (i.ToLower() == "volver")//Vamos a ordenar que el texto de entrada sea transformado en minusculas
+            else if (i == Convert.ToString(c[4]))
+            {
+                Transformador.CmdInc();//Pulgadas
+                goto init;
+            }
+            else if (i == Convert.ToString(c[5]))
+            {
+                Transformador.CmdYd();//Yardas
+                goto init;
+            }
+            else if (i == Convert.ToString(c[6]))
+            {
+                Transformador.CmdPie();//Pies
+                goto init;
+            }
+            else if (i == Convert.ToString(c[7]))//Vamos a ordenar que el texto de entrada sea transformado en minusculas
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Green;

@@ -275,11 +275,11 @@ namespace Consola
             bool rep = true;
             while (rep)
             {
-                Console.Write("Inserte una cantidad en Millas náuticas a convertir: ");
+                Console.Write("Inserte una cantidad en Millas Náuticas a convertir: ");
                 try
                 {
                     double Nmi = Convert.ToDouble(Console.ReadLine());
-                    Op_Long.OpNmi(Nmi);//Llamamos al método de Millas
+                    Op_Long.OpNmi(Nmi);//Llamamos al método de Millas Náuticas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -291,6 +291,125 @@ namespace Consola
                     Console.WriteLine(e.Message + "\n");
                 }
                 Console.Write(reop);
+            go:
+                Console.Write(reop);
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    Console.Clear();
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(vlno);
+                    goto go;
+                }
+            }
+        }
+        public static void CmdInc()
+        {
+            bool rep = true;
+            while (rep)
+            {
+                Console.Write("Inserte una cantidad en Pulgadas a convertir: ");
+                try
+                {
+                    double Inc = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpInc(Inc);//Llamamos al método de Pulgadas
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.Write(reop);
+            go:
+                Console.Write(reop);
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    Console.Clear();
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(vlno);
+                    goto go;
+                }
+            }
+        }
+        public static void CmdYd()
+        {
+            bool rep = true;
+            while (rep)
+            {
+                Console.Write("Inserte una cantidad en Yardas a convertir: ");
+                try
+                {
+                    double Yd = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpYd(Yd);//Llamamos al método de Yardas
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+                Console.Write(reop);
+            go:
+                Console.Write(reop);
+                string go = Console.ReadLine();
+                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                {
+                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                }
+                else if (go.ToUpper() == "N")
+                {
+                    Console.Clear();
+                    rep = false;//Cambiamos de true a false
+                }
+                else
+                {
+                    Console.WriteLine(vlno);
+                    goto go;
+                }
+            }
+        }
+        public static void CmdPie()
+        {
+            bool rep = true;
+            while (rep)
+            {
+                Console.Write("Inserte una cantidad en Pies a convertir: ");
+                try
+                {
+                    double pie = Convert.ToDouble(Console.ReadLine());
+                    Op_Long.OpPie(pie);//Llamamos al método de pie
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
             go:
                 Console.Write(reop);
                 string go = Console.ReadLine();
