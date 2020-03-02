@@ -429,6 +429,125 @@ namespace Consola
                 }
             }
         }
+        #endregion
+        #region Masa
+        public static void CmdKg()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en Kilogramos a convertir: ");
+                try
+                {
+                    double Kg = Convert.ToDouble(Console.ReadLine());
+                    Op_masa.OpKg(Kg);//Llamamos al método de Kilogramos
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;//salimos del primer bucle while
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+
+                break;//salimos del segundo bucle while
+            }
+            #endregion
+        }
+        public static void CmdGr()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en gramos a convertir: ");
+                try
+                {
+                    double G = Convert.ToDouble(Console.ReadLine());
+                    Op_masa.OpG(G);//Llamamos al método de Gramos
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message + "\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                }
+
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;//salimos del primer bucle while
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+
+                break;
+            }
+
+        }
+        //public static void CmdTn()
+        //{
+        //    bool r = true;
+        //}
+        //public static void CmdTc()
+        //{
+        //    bool r = true;
+        //}
+        //public static void CmdTl()
+        //{
+        //    bool r = true;
+        //}
+        //public static void CmdLb()
+        //{
+        //    bool r = true;
+        //}
+        //public static void CmdOz()
+        //{
+        //    bool r = true;
+        //}
+        //public static void CmdSt()
+        //{
+        //    bool r = true;
+        //}
     }
 }
-#endregion

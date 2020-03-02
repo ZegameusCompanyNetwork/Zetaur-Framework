@@ -9,6 +9,7 @@ namespace Consola
 {
     class Cmd_conversor
     {
+        #region Menú-Principal
         public static void Cmd_prn()
         {
         init:
@@ -58,11 +59,12 @@ namespace Consola
             }
 
         }
+        #endregion
         #region Submenú temperatura
         public static void Tmp_cmd()
         {
         init:
-            int[] tmp = new int[4] { 1, 2, 3, 4};
+            int[] tmp = new int[4] { 1, 2, 3, 4 };
             Console.WriteLine("\nSección de conversión de temperatura");
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\nComandos disponibles:\n{0}: Para convertir de Celsius a Fahrenheit y a Kelvins.\n{1}: Para convertir de Fahrenheit a Celsius y a Kelvins.", tmp[0], tmp[1]);
@@ -114,14 +116,15 @@ namespace Consola
         public static void Long_cmd()
         {
         init:
+            #region Comandos
             sbyte[] c = new sbyte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };//Utilizamos sbyte en vez de int porque utilizamos valores pequeños y no es necesario reservar mucho espacio en la memoria RAM, estos valores van de -128 a 127, por lo que aún nos sobra.
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\nComandos disponibles:\n{0}: Para convertir Metros.", c[0]);
             Console.WriteLine("{0}: Para convertir kilometros.\n{1}: Para convertir Millas.", c[1], c[2]);
             Console.WriteLine("{0}: Para convertir Millas náuticas.\n{1}: Para convertir Pulgadas.", c[3], c[4]);
-            Console.WriteLine("{0}: Para convertir Yardas.\n{1}: Para convertir Pies",c[5],c[6]);
-            Console.WriteLine("{0}: Para volver al menú principal del conversor",c[7]);
-            
+            Console.WriteLine("{0}: Para convertir Yardas.\n{1}: Para convertir Pies", c[5], c[6]);
+            Console.WriteLine("{0}: Para volver al menú principal del conversor", c[7]);
+            #endregion
             #region if-else
             string i = Console.ReadLine();
             if (i == Convert.ToString(c[0]))//Utilizamos Convert.ToString para poder compararlo con i, ya que la entrada de volver es solo texto
@@ -176,13 +179,50 @@ namespace Consola
         #region Submenú masa
         public static void SbmMasa()
         {
-            int[] a = new int[15] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-            Console.WriteLine("Comandos disponibles:\n{0}: Conversor Kilogramos - Tonelada, T. Larga y T. Corta.", a[0]);
-            Console.WriteLine("{0}: Conversor Kg - Libras.\n{1}: Conversor Kg - Onzas.\n{2}: Conversor Kg - \"Stone\"", a[1], a[2], a[3]);
-            Console.WriteLine("{0}: Conversor Toneladas - Kg.\n{1}: Conversor Toneladas - Libras.\n{2}: Conversor Toneladas - Onzas.", a[4], a[5], a[6]);
-            Console.WriteLine("{0}: Conversor Tonelas - \"Stone\".\n{1}: Conversor Libras - Kg.\n{1}: Conversor Onzas - Kg.\n{2}: \"Stones\" - Kg.", a[7], a[8], a[9], a[10]);
-            Console.WriteLine("{0}: Conversor Libas - Kg.\n{1}: Conversor Libras - Toneladas.\n{2}: Conversor Libras - Onzas.\n{3}: Conversor Libras -\"Stone\".", a[11], a[12], a[13], a[14]);
-            Console.WriteLine("Aún faltan unidades, disculpen las molestias. Esto solo le mostrará las unidades que podran ser convertidas.");
+            bool r = true;
+            while (r)
+            {
+                sbyte[] a = new sbyte[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                Console.WriteLine("Comandos disponibles:\n{0}: Conversor Kilogramos.\n{1}: Conversor Gramos.", a[0], a[1]);
+                Console.WriteLine("{0}: Toneladas.\n{1}: Conversor Toneladas Cortas.\n{2}: Conversor Toneladas Largas", a[2], a[3], a[4]);
+                Console.WriteLine("{0}: Conversor Libras.\n{1}: Conversor Onzas.\n{2}: Conversor \"Stones\".", a[5], a[6], a[7]);
+                Console.WriteLine("{0}: Volver al menú.", a[8]);
+
+                sbyte i = 1;
+                try
+                {
+                    i = Convert.ToSByte(Console.ReadLine());
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("El valor introducizo no es numérico.");
+                    Console.WriteLine(e.Message);
+                }
+                if (i == a[0])
+                {
+                    Transformador.CmdKg();
+                    r = true;
+                }
+                else if (i == a[1])
+                {
+                    Transformador.CmdGr();
+                    r = true;
+                }
+                else if (i == a[8])
+                {
+                    r = false;
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("Comando no encontrado.");
+                    r = true;
+                }
+            }
         }
         #endregion
     }

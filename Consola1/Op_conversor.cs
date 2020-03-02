@@ -69,23 +69,42 @@ namespace Consola
         public static void OpNmi(double Nmi)
         {
             double m = Nmi * 1852, km = Nmi * 1.852, inc = Nmi * 72913, mi = Nmi * 1.151, yd = Nmi * 2025.37, pie = Nmi * 6076.12;
-            Console.WriteLine("{0} {1} son:\n{2} {3}.\n{4} {5} o {6} {7}.\n{8} {9}.\n{10} {11}.\n{12} {13}.", Nmi, longs[3], mi,longs[2], m,longs[0], km,longs[1],inc, longs[4], yd,longs[5], pie, longs[6]);
+            Console.WriteLine("{0} {1} son:\n{2} {3}.\n{4} {5} o {6} {7}.\n{8} {9}.\n{10} {11}.\n{12} {13}.", Nmi, longs[3], mi, longs[2], m, longs[0], km, longs[1], inc, longs[4], yd, longs[5], pie, longs[6]);
         }
         #endregion
         #region Pulgadas-Yardas-Pies
-        public static void OpInc(double Inc){
+        public static void OpInc(double Inc)
+        {
             double m = Inc / 39.97, km = Inc / 39970, mi = Inc / 63360, Nmi = Inc / 72913, yd = 36, pie = Inc / 12;
-            Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.", Inc,longs[4],m,longs[0],km,longs[1],mi,longs[2],Nmi,longs[3],yd,longs[5],pie,longs[6]);
+            Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.", Inc, longs[4], m, longs[0], km, longs[1], mi, longs[2], Nmi, longs[3], yd, longs[5], pie, longs[6]);
         }
         public static void OpYd(double Yd)
         {
             double m = Yd / 1.094, km = m / 1000, Mi = Yd / 1760, Nmi = Yd / 2025, Inc = Yd * 36, pie = Yd * 3;
-            Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.", Yd,longs[5],m,longs[0],km,longs[1],Mi,longs[2],Nmi,longs[3],Inc,longs[4],pie,longs[6]);
+            Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.", Yd, longs[5], m, longs[0], km, longs[1], Mi, longs[2], Nmi, longs[3], Inc, longs[4], pie, longs[6]);
         }
-        public static void OpPie (double pie) 
+        public static void OpPie(double pie)
         {
-            double m = pie / 3.281,km = m /1000, Mi = pie / 5280,Nmi = pie / 6076,Inc = pie * 12, Yd = pie /3;
-            Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.", pie,longs[6],m,longs[0],km,longs[1],Mi,longs[2],Nmi,longs[3],Inc,longs[4],Yd,longs[5]);
+            double m = pie / 3.281, km = m / 1000, Mi = pie / 5280, Nmi = pie / 6076, Inc = pie * 12, Yd = pie / 3;
+            Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.", pie, longs[6], m, longs[0], km, longs[1], Mi, longs[2], Nmi, longs[3], Inc, longs[4], Yd, longs[5]);
+        }
+        #endregion
+    }
+    class Op_masa
+    {
+        static readonly string[] masas = { "Kilogramos (kg)", "Gramos (g)", "Toneladas (t)", "Tonelada Corta (US t)", "Tonelada larga (UK t)", "Onzas (Oz)", "Libras (lb)", "Stones (st)" };
+        #region Kilogramos-Gramos
+        public static void OpKg(double Kg)
+        {
+            double g = Kg * 1000, T = Kg / 1000, UsT = Kg / 907.185, UkT = Kg / 1016, Oz = Kg * 32.274, Lb = Kg * 2.20462, St = Kg / 6.35;
+            Console.WriteLine("{0} {1} son:\n{2} {3}.\n{4} {5}, {6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.\n{14} {15}", Kg, masas[0], g, masas[1], T, masas[2], UsT, masas[3], UkT, masas[4], Oz, masas[5], Lb, masas[6], St, masas[7]);
+        }
+        public static void OpG(double g)
+        {
+            double Kg = g / 1000, T = Kg / 1000, UsT = g / 907185, UkT = g / (1.016 * Math.E + 6), Oz = g / 28.35, Lb = g / 454, St = g / 6350;
+            //Para convertir de gramos a Tonelada larga (Uk t) tenemos que multiplicar por el número e, para ello usamos la clase Math.E
+            //Es importante el uso de parentesis en la conversión de g a Uk t, porque sino dividirá entre 1.016, después multiplicara por e y por último sumara 6 al resultado final y eso no es lo que queremos.
+            Console.WriteLine("{0} {1} son:\n{2} {3}.\n{4} {5}, {6} {7} o {8} {9}.\n{10} {11}.\n{12} {13}.\n{14} {15}", g, masas[1], Kg, masas[0], T, masas[2], UsT, masas[3], UkT, masas[4], Oz, masas[5], Lb, masas[6], St, masas[7]);
         }
         #endregion
     }
