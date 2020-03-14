@@ -53,7 +53,6 @@ namespace Consola
             }
             else if(Cmd.ToLower()==cmnd[6])
             {
-                
                 Permcombrep perm = new Permcombrep();
                 perm.Factorial();
                 goto init;
@@ -71,6 +70,9 @@ namespace Consola
                 goto init;
             }
         }
+        /// <summary>
+        /// Método de información sobre la aplicación.
+        /// </summary>
         public static void About_console()
         {
             const string msg_about = "Esta aplicación de consola le permitira ver la hora y fecha actual, saber que combinaciones de teclas pulsas, etc.";
@@ -82,6 +84,9 @@ namespace Consola
             Console.WriteLine("Pulsa Cualquier tecla para continuar");
             Console.ReadKey();//espera hasta que se pulse una tecla
         }
+        /// <summary>
+        /// Método que devuelve un listado de comandos disponibles y su función.
+        /// </summary>
         public void Help_console()
         {
             Console.ForegroundColor = ConsoleColor.Green; //cambia el color de letra a verde claro

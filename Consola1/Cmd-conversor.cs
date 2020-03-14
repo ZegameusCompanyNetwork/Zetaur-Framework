@@ -88,17 +88,17 @@ namespace Consola
 
             if (input == tmp[0])//Celsius a Fahrenheits y a Kelvins
             {
-                Transformador.CelFahrKel();
+                Transformador.TmpCel();
                 goto init;
             }
             else if (input == tmp[1]) //Fahrenheits a Celsius y Kelvins
             {
-                Transformador.FahrKelCel();
+                Transformador.TmpFahr();
                 goto init;
             }
             else if (input == tmp[2])//Kelvins a Celsius y a Fahrenheits
             {
-                Transformador.KelCelFahr();
+                Transformador.TmpKel();
                 goto init;
             }
             else if (input == tmp[3])
@@ -182,6 +182,7 @@ namespace Consola
             bool r = true;
             while (r)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 sbyte[] a = new sbyte[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
                 Console.WriteLine("Comandos disponibles:\n{0}: Conversor Kilogramos.\n{1}: Conversor Gramos.", a[0], a[1]);
                 Console.WriteLine("{0}: Toneladas.\n{1}: Conversor Toneladas Cortas.\n{2}: Conversor Toneladas Largas", a[2], a[3], a[4]);
@@ -210,6 +211,36 @@ namespace Consola
                 else if (i == a[1])
                 {
                     Transformador.CmdGr();
+                    r = true;
+                }
+                else if (i == a[2])
+                {
+                    Transformador.CmdT();
+                    r = true;
+                }
+                else if (i == a[3])
+                {
+                    Transformador.CmdUsT();
+                    r = true;
+                }
+                else if (i == a[4])
+                {
+                    Transformador.CmdUkT();
+                    r = true;
+                }
+                else if (i == a[5])
+                {
+                    Transformador.CmdLb();
+                    r = true;
+                }
+                else if (i == a[6])
+                {
+                    Transformador.CmdOz();
+                    r = true;
+                }
+                else if (i == a[7])
+                {
+                    Transformador.CmdSt();
                     r = true;
                 }
                 else if (i == a[8])

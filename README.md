@@ -23,10 +23,6 @@ Las funcionalidades básicas que dispone en esta versión son:
 
 Dentro de poco se realizará una reducción de código para mejorar la calidad y rendimiento del programa.
 - Progreso realizado en:
-> - Arranque del programa (Antes eran dos archivos, ahora solo 1)
-> - Menú conversor.
-> - Conversor de unidades de temperatura
-> - Conversor de unidades de longitud
-> - Conversor de unidades de masa (Kilogramos y gramos)
+> - Totalidad del programa en la versión actual (1.1.3.0)
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q210SP8)

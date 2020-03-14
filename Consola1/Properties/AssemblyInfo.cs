@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("App Consola")]
+[assembly: AssemblyTitle("Consola multipropósito")]
 [assembly: AssemblyDescription("Consola con utilidades como transformar unidades(longitud, masa, temperatura...), mediante un conjunto de comandos")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Zegameus Company Network Records")]
@@ -33,6 +33,6 @@ using System.Runtime.InteropServices;
 // Puede especificar todos los valores o utilizar los números de compilación y de revisión predeterminados
 // mediante el carácter '*', como se muestra a continuación:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.2.2")]
+[assembly: AssemblyVersion("1.1.3.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: NeutralResourcesLanguage("es-ES")]

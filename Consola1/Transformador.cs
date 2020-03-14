@@ -14,12 +14,15 @@ namespace Consola
         private const string Rp = "Otra temperatura que calcular? S/N: ";//Vamos a ahorrar espacio creando una constante para las repeticiones, en este caso para temperatura
         private const string reop = "Otra medida a convertir (S/N): ";//Y en este para las medidas de longitud
         private const string vlno = "¿A introducido usted el valor adecuado?";//y esta para el S/N de continuar los bucles en caso de valor no admitido
+        #region Temperatura
         private const string frmcv = "La formula para convertir de";
         private static readonly string[] temps = { "Celsius", "Fahrenheit", "Kelvins" };//para poder usar el array tenemos que ponerlo como static y para evitar su modificación lo ponemos como readonly
         private static readonly string[] frms = { "ºC = (ºF - 32) * 5 / 9", "ºC = K -273.15", "K = ºC + 273.15", "K = (ºF - 32) * 5 / 9 + 273.15", "ºF = (ºC * 5 / 9) + 32", "ºF = (K - 273.15) * 9 / 5 + 32" };
-        #region Temperatura
         #region Celsius-Fahrenheits-Kelvins
-        public static void CelFahrKel()
+        /// <summary>
+        /// Método pre-creado de conversión de temperaturas. Celsius a Fahrenheits y a Kelvins.
+        /// </summary>
+        public static void TmpCel()
         {
             bool rep = true; //Declaramos un booleano en condicion true para poder ejecutar un while a continuación
             while (rep)
@@ -36,15 +39,19 @@ namespace Consola
                 catch (Exception e) when (e.GetType() != typeof(FormatException))//Aquí creamos un encapsulador que en caso de error va a comprobar que el tipo de excepción producida no sea FormatException.
                 //Y en caso de que sea FormatException, el programa ejecutara el código del catch que contenga el argumento FormatException 
                 {
+                    Console.ForegroundColor=ConsoleColor.Red;//Cambiamos el color para que quede mejor.
                     Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;//Ponemos el color inicial
                 }
                 catch (FormatException e)//Este es el bloque catch que se ejecutara en caso de que la excepción producida sea FormatException
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);//Llamamos a la constante declarada al principio del programa
                     Console.WriteLine(e.Message + "\n");//e.Message nos permite mostrar una descripción corta del error, sin mostrar código del programa.
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
                 Console.WriteLine(Rp);
-            /*Creamos una condicion if, sin else, ya que este último vendría siendo el while; para mostrar en pantalla la cadena "go"
+            /*Creamos una condicion if, con un else if y con un else final, ya que este último vendría siendo el while; para mostrar en pantalla la cadena "go"
              con la instrucción go.ToUpper() hacemos que el valor introducido se combierta a mayúsculas, y si no es igual a S (!= "S") hace que el bool rep
              sea false, finalizando el bucle while
              */
@@ -68,7 +75,10 @@ namespace Consola
         }
         #endregion
         #region Fahrenheits-Celsius-Kelvins
-        public static void FahrKelCel()
+        /// <summary>
+        /// Método pre-creado de conversión de temperaturas. Fahrenheits a Celsius y a Kelvins.
+        /// </summary>
+        public static void TmpFahr()
         {
             bool rep = true;
             while (rep)
@@ -83,12 +93,16 @@ namespace Consola
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
                     Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
                 Console.WriteLine(Rp);
             go:
@@ -111,7 +125,10 @@ namespace Consola
         }
         #endregion
         #region Kelvins-Fahrenheits-Celsius
-        public static void KelCelFahr()
+        /// <summary>
+        /// Método pre-creado de conversión de temperaturas. Kelvins a Celsius y a Fahrenheits.
+        /// </summary>
+        public static void TmpKel()
         {
             bool rep = true;
             while (rep)
@@ -126,12 +143,16 @@ namespace Consola
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
                     Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
                 Console.WriteLine(Rp);
             go:
@@ -155,7 +176,9 @@ namespace Consola
         #endregion
         #endregion
         #region Longitud
-
+        /// <summary>
+        /// Método de conversión de metros al resto de unidades disponibles (véase en el método Op_Long).
+        /// </summary>
         public static void CmdM()
         {
             bool rep = true;
@@ -441,16 +464,20 @@ namespace Consola
                 try
                 {
                     double Kg = Convert.ToDouble(Console.ReadLine());
-                    Op_masa.OpKg(Kg);//Llamamos al método de Kilogramos
+                    Op_Masa.OpKg(Kg);//Llamamos al método de Kilogramos
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
                     Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
 
                 bool r1 = true;
@@ -476,7 +503,6 @@ namespace Consola
 
                 break;//salimos del segundo bucle while
             }
-            #endregion
         }
         public static void CmdGr()
         {
@@ -488,16 +514,20 @@ namespace Consola
                 try
                 {
                     double G = Convert.ToDouble(Console.ReadLine());
-                    Op_masa.OpG(G);//Llamamos al método de Gramos
+                    Op_Masa.OpG(G);//Llamamos al método de Gramos
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
                     Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
 
                 bool r1 = true;
@@ -525,29 +555,309 @@ namespace Consola
             }
 
         }
-        //public static void CmdTn()
-        //{
-        //    bool r = true;
-        //}
-        //public static void CmdTc()
-        //{
-        //    bool r = true;
-        //}
-        //public static void CmdTl()
-        //{
-        //    bool r = true;
-        //}
-        //public static void CmdLb()
-        //{
-        //    bool r = true;
-        //}
-        //public static void CmdOz()
-        //{
-        //    bool r = true;
-        //}
-        //public static void CmdSt()
-        //{
-        //    bool r = true;
-        //}
+        public static void CmdT()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en toneladas a convertir: ");
+                try
+                {
+                    double T = Convert.ToDouble(Console.ReadLine());
+                    Op_Masa.OpT(T);//Llamamos al método de Toneladas
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;//salimos del primer bucle while
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+
+                break;
+            }
+        }
+        /// <summary>
+        /// Método de conversión pre-configurado de Toneladas cortas (Us t).
+        /// </summary>
+        public static void CmdUsT()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en toneladas cortas (Us t) a convertir: ");
+                try
+                {
+                    double UsT = Convert.ToDouble(Console.ReadLine());
+                    Op_Masa.OpUsT(UsT);//Llamamos al método de Toneladas cortas (Us t)
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;//salimos del primer bucle while
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+
+                break;
+            }
+        }
+        public static void CmdUkT()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en toneladas largas (Uk t) a convertir: ");
+                try
+                {
+                    double UkT = Convert.ToDouble(Console.ReadLine());
+                    Op_Masa.OpUkT(UkT);//Llamamos al método de Toneladas Largas
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;//salimos del primer bucle while
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+
+                break;
+            }
+        }
+        public static void CmdLb()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en libras a convertir: ");
+                try
+                {
+                    double Lb = Convert.ToDouble(Console.ReadLine());
+                    Op_Masa.OpLb(Lb);//Llamamos al método de libras
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;//salimos del primer bucle while
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+
+                break;
+            }
+        }
+        public static void CmdOz()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en onzas a convertir: ");
+                try
+                {
+                    double Oz = Convert.ToDouble(Console.ReadLine());
+                    Op_Masa.OpOz(Oz);//Llamamos al método de Onzas
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;//salimos del primer bucle while
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+
+                break;
+            }
+        }
+        public static void CmdSt()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en stones a convertir: ");
+                try
+                {
+                    double St = Convert.ToDouble(Console.ReadLine());
+                    Op_Masa.OpSt(St);//Llamamos al método de Stones
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;//salimos del primer bucle while
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+
+                break;
+            }
+        }
+        #endregion
     }
 }
