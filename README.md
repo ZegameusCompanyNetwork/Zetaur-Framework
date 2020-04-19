@@ -1,4 +1,4 @@
-# Consola básica con comandos
+# Zetaur - Net Framework
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/ZegameusCompanyNetwork/Consola-basica-con-comandos?color=green&label=Version&style=plastic)
 ![GitHub](https://img.shields.io/github/license/ZegameusCompanyNetwork/Consola-basica-con-comandos?style=plastic)
 ![GitHub All Releases](https://img.shields.io/github/downloads/ZegameusCompanyNetwork/Consola-basica-con-comandos/total?label=Descargas&style=plastic)
@@ -20,9 +20,10 @@ Las funcionalidades básicas que dispone en esta versión son:
 > - Temperatura (Kelvin, grados celsius y grados fahrenheit)
 > - Longitud (Metros, Kilómetros, Millas y Millas Náuticas, Pulgadas, Yardas y Pies)
 > - Masa (Kilogramos, Gramos, Toneladas (métricas), Tonelada Corta, Tonelada Larga, Libras, Onzas, Stones)
+> - Presión (Atmósferas, Bares, Milibares, PSI, Pascales, Hectopascales, Mílimetros de Mercurio / Torr, Kilopondios por centímetro cuadrado)
 
 Dentro de poco se realizará una reducción de código para mejorar la calidad y rendimiento del programa.
 - Progreso realizado en:
-> - Totalidad del programa en la versión actual (1.1.3.0)
+> - Totalidad del programa en la versión actual (1.1.3.1)
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q210SP8)
