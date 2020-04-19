@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Consola
+namespace Zetaur
 {
     class Teclas
     {
@@ -16,13 +16,13 @@ namespace Consola
 
                 StringBuilder salida = new StringBuilder(string.Format("Has pulsado {0}", entrada.Key.ToString())); //{0} es para establecer el valor de input.key.ToString() en una posicion del texto
                 bool modifiers = false; //hacemos que los modificadores Alt, Ctrl y Shift tengan el valor falso como que no están pulsados
-                
+
                 //Ahora comprobamos si la combinacion pulsada contiene Alt
                 if ((entrada.Modifiers & ConsoleModifiers.Alt) == ConsoleModifiers.Alt)
                 {
                     salida.Append(", con " + ConsoleModifiers.Alt.ToString());
                     modifiers = true;
-                } 
+                }
                 //Ahora comprobamos si la combinacion pulsada contiene Ctrl
                 if ((entrada.Modifiers & ConsoleModifiers.Control) == ConsoleModifiers.Control)
                 {

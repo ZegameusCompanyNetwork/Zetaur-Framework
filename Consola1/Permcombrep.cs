@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Consola
+namespace Zetaur
 {
     class Permcombrep
     {
@@ -19,9 +19,9 @@ namespace Consola
                     res = res * i;
                 }
 
-                Console.WriteLine("El factorial de {0} es: {1}",num, res);
+                Console.WriteLine("El factorial de {0} es: {1}", num, res);
             }
-            catch(ArgumentException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine("El valor introducido no es válido, Error {0}", e);
                 Console.Clear();

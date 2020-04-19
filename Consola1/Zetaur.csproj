@@ -83,7 +83,7 @@
     <ApplicationIcon>cmd_IDI_APPICON.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Consola.Program</StartupObject>
+    <StartupObject>Zetaur.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

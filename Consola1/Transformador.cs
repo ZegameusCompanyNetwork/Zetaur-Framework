@@ -5,8 +5,10 @@
  */
 
 using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
-namespace Consola
+namespace Zetaur
 {
     class Transformador
     {
@@ -27,10 +29,11 @@ namespace Consola
             bool rep = true; //Declaramos un booleano en condicion true para poder ejecutar un while a continuación
             while (rep)
             {
-                Console.WriteLine("Introduzca una temperatura en grados celsius a convertir:\n>>");
+                Console.WriteLine("Introduzca una temperatura en grados celsius a convertir:");
+                Console.Write(">> ");
                 try
                 {
-                    double cels = Convert.ToDouble(Console.ReadLine());//Hacemos que el usuario introduzca una cantidad por la consola, y obligamos a convertirla a double.
+                    double cels = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));//Hacemos que el usuario introduzca una cantidad por la consola, y obligamos a convertirla a double.
                     //En caso de no poder por el motivo que sea, pasaremos al bloque catch.
                     Console.WriteLine("\n{0} {1} a {2} es: {3}", frmcv, temps[0], temps[1], frms[4]);//Para ahorrar espacio utilizamos variables para acortar el código
                     Console.WriteLine("{0} {1} a {2} es: {3}", frmcv, temps[0], temps[2], frms[2]);
@@ -39,15 +42,15 @@ namespace Consola
                 catch (Exception e) when (e.GetType() != typeof(FormatException))//Aquí creamos un encapsulador que en caso de error va a comprobar que el tipo de excepción producida no sea FormatException.
                 //Y en caso de que sea FormatException, el programa ejecutara el código del catch que contenga el argumento FormatException 
                 {
-                    Console.ForegroundColor=ConsoleColor.Red;//Cambiamos el color para que quede mejor.
-                    Console.WriteLine(e.Message + "\n");
+                    Console.ForegroundColor = ConsoleColor.Red;//Cambiamos el color para que quede mejor.
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;//Ponemos el color inicial
                 }
                 catch (FormatException e)//Este es el bloque catch que se ejecutara en caso de que la excepción producida sea FormatException
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);//Llamamos a la constante declarada al principio del programa
-                    Console.WriteLine(e.Message + "\n");//e.Message nos permite mostrar una descripción corta del error, sin mostrar código del programa.
+                    Console.WriteLine($"\n{e.Message}\n");//e.Message nos permite mostrar una descripción corta del error, sin mostrar código del programa.
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 Console.WriteLine(Rp);
@@ -86,7 +89,7 @@ namespace Consola
                 Console.WriteLine("Introduzca una temperatura en {0} a convertir:\n>>", temps[1]);//Entrada en Farhenheit
                 try
                 {
-                    double fahr = Convert.ToDouble(Console.ReadLine());
+                    double fahr = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Console.WriteLine("\n{0} {1} a {2} es: {3}", frmcv, temps[1], temps[0], frms[0]);
                     Console.WriteLine("{0} {1} a {2} es: {3}", frmcv, temps[0], temps[2], frms[3]);
                     Op_Temp.OpFahrCelKel(fahr);
@@ -94,14 +97,14 @@ namespace Consola
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 Console.WriteLine(Rp);
@@ -136,7 +139,7 @@ namespace Consola
                 Console.WriteLine("Introduzca una temperatura en {0} a convertir:\n>>", temps[2]);//Entrada en Kelvins
                 try
                 {
-                    double kel = Convert.ToDouble(Console.ReadLine());
+                    double kel = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Console.WriteLine("\n{0} {1} a {2} es: {3}", frmcv, temps[2], temps[0], frms[1]);
                     Console.WriteLine("{0} {1} a {2} es: {3}", frmcv, temps[2], temps[1], frms[5]);
                     Op_Temp.OpKelFahrCels(kel);
@@ -144,14 +147,14 @@ namespace Consola
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 Console.WriteLine(Rp);
@@ -187,17 +190,17 @@ namespace Consola
                 Console.Write("Inserte una cantidad en metros a convertir: ");
                 try
                 {
-                    double m = Convert.ToDouble(Console.ReadLine());
+                    double m = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Long.OpM(m);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 catch (FormatException e)
                 {
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);//llamamos a la constante reop declarada al inicio de la region Longitud, usamos solo Write para que se muestre a continuación el valor de S o N
             go:
@@ -225,17 +228,17 @@ namespace Consola
                 Console.Write("Inserte una cantidad en metros a convertir: ");
                 try
                 {
-                    double km = Convert.ToDouble(Console.ReadLine());
+                    double km = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Long.OpKm(km);//Llamamos al método de kilometros
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 catch (FormatException e)
                 {
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
             go:
@@ -263,17 +266,17 @@ namespace Consola
                 Console.Write("Inserte una cantidad en Millas a convertir: ");
                 try
                 {
-                    double Mi = Convert.ToDouble(Console.ReadLine());
+                    double Mi = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Long.OpMi(Mi);//Llamamos al método de Millas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 catch (FormatException e)
                 {
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
             go:
@@ -301,17 +304,17 @@ namespace Consola
                 Console.Write("Inserte una cantidad en Millas Náuticas a convertir: ");
                 try
                 {
-                    double Nmi = Convert.ToDouble(Console.ReadLine());
+                    double Nmi = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Long.OpNmi(Nmi);//Llamamos al método de Millas Náuticas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 catch (FormatException e)
                 {
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
             go:
@@ -341,17 +344,17 @@ namespace Consola
                 Console.Write("Inserte una cantidad en Pulgadas a convertir: ");
                 try
                 {
-                    double Inc = Convert.ToDouble(Console.ReadLine());
+                    double Inc = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Long.OpInc(Inc);//Llamamos al método de Pulgadas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 catch (FormatException e)
                 {
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
             go:
@@ -381,17 +384,17 @@ namespace Consola
                 Console.Write("Inserte una cantidad en Yardas a convertir: ");
                 try
                 {
-                    double Yd = Convert.ToDouble(Console.ReadLine());
+                    double Yd = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Long.OpYd(Yd);//Llamamos al método de Yardas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 catch (FormatException e)
                 {
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
             go:
@@ -421,17 +424,17 @@ namespace Consola
                 Console.Write("Inserte una cantidad en Pies a convertir: ");
                 try
                 {
-                    double pie = Convert.ToDouble(Console.ReadLine());
+                    double pie = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Long.OpPie(pie);//Llamamos al método de pie
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
                 catch (FormatException e)
                 {
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                 }
             go:
                 Console.Write(reop);
@@ -454,6 +457,9 @@ namespace Consola
         }
         #endregion
         #region Masa
+        /// <summary>
+        /// Método de conversión pre-configurado de Kilogramos(Kg).
+        /// </summary>
         public static void CmdKg()
         {
             bool r = true;
@@ -463,20 +469,20 @@ namespace Consola
                 Console.Write("Inserte una cantidad en Kilogramos a convertir: ");
                 try
                 {
-                    double Kg = Convert.ToDouble(Console.ReadLine());
+                    double Kg = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Masa.OpKg(Kg);//Llamamos al método de Kilogramos
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
@@ -504,6 +510,9 @@ namespace Consola
                 break;//salimos del segundo bucle while
             }
         }
+        /// <summary>
+        /// Método de conversión pre-configurado de Gramos (g)
+        /// </summary>
         public static void CmdGr()
         {
             bool r = true;
@@ -513,20 +522,20 @@ namespace Consola
                 Console.Write("Inserte una cantidad en gramos a convertir: ");
                 try
                 {
-                    double G = Convert.ToDouble(Console.ReadLine());
+                    double G = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Masa.OpG(G);//Llamamos al método de Gramos
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
@@ -555,6 +564,9 @@ namespace Consola
             }
 
         }
+        /// <summary>
+        /// Método de conversión pre-configurado de Toneladas (métricas).
+        /// </summary>
         public static void CmdT()
         {
             bool r = true;
@@ -564,20 +576,20 @@ namespace Consola
                 Console.Write("Inserte una cantidad en toneladas a convertir: ");
                 try
                 {
-                    double T = Convert.ToDouble(Console.ReadLine());
+                    double T = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Masa.OpT(T);//Llamamos al método de Toneladas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
@@ -617,20 +629,20 @@ namespace Consola
                 Console.Write("Inserte una cantidad en toneladas cortas (Us t) a convertir: ");
                 try
                 {
-                    double UsT = Convert.ToDouble(Console.ReadLine());
+                    double UsT = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Masa.OpUsT(UsT);//Llamamos al método de Toneladas cortas (Us t)
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
@@ -658,6 +670,9 @@ namespace Consola
                 break;
             }
         }
+        /// <summary>
+        /// Método de conversión pre-configurado de Toneladas largas (Uk t).
+        /// </summary>
         public static void CmdUkT()
         {
             bool r = true;
@@ -667,20 +682,20 @@ namespace Consola
                 Console.Write("Inserte una cantidad en toneladas largas (Uk t) a convertir: ");
                 try
                 {
-                    double UkT = Convert.ToDouble(Console.ReadLine());
+                    double UkT = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Masa.OpUkT(UkT);//Llamamos al método de Toneladas Largas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
@@ -708,6 +723,9 @@ namespace Consola
                 break;
             }
         }
+        /// <summary>
+        /// Método de conversión pre-configurado de Libras (lb).
+        /// </summary>
         public static void CmdLb()
         {
             bool r = true;
@@ -717,20 +735,20 @@ namespace Consola
                 Console.Write("Inserte una cantidad en libras a convertir: ");
                 try
                 {
-                    double Lb = Convert.ToDouble(Console.ReadLine());
+                    double Lb = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Masa.OpLb(Lb);//Llamamos al método de libras
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
@@ -758,6 +776,9 @@ namespace Consola
                 break;
             }
         }
+        /// <summary>
+        /// Método de conversión pre-configurado de Onzas (Oz).
+        /// </summary>
         public static void CmdOz()
         {
             bool r = true;
@@ -767,20 +788,20 @@ namespace Consola
                 Console.Write("Inserte una cantidad en onzas a convertir: ");
                 try
                 {
-                    double Oz = Convert.ToDouble(Console.ReadLine());
+                    double Oz = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Masa.OpOz(Oz);//Llamamos al método de Onzas
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
@@ -808,6 +829,9 @@ namespace Consola
                 break;
             }
         }
+        /// <summary>
+        /// Método de conversión pre-configurado de Stones (St).
+        /// </summary>
         public static void CmdSt()
         {
             bool r = true;
@@ -817,20 +841,20 @@ namespace Consola
                 Console.Write("Inserte una cantidad en stones a convertir: ");
                 try
                 {
-                    double St = Convert.ToDouble(Console.ReadLine());
+                    double St = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Op_Masa.OpSt(St);//Llamamos al método de Stones
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(FrmExc);
-                    Console.WriteLine(e.Message + "\n");
+                    Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
@@ -855,6 +879,392 @@ namespace Consola
                     }
                 }
 
+                break;
+            }
+        }
+        #endregion
+        #region Presion
+        public static void CmdAtm()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en Atmósferas a convertir: ");
+                try
+                {
+                    double Atm = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                    Op_Presion.OpAtm(Atm);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")
+                    {
+                        goto Go;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+                break;
+            }
+        }
+        public static void CmdBar()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en bares a convertir: ");
+                try
+                {
+                    double Bar = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                    Op_Presion.OpBar(Bar);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")
+                    {
+                        goto Go;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+                break;
+            }
+        }
+        public static void CmdmBar()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en milibares a convertir: ");
+                try
+                {
+                    double mBar = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                    Op_Presion.OpmBar(mBar);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")
+                    {
+                        goto Go;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+                break;
+            }
+        }
+        public static void CmdPSI()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en PSI a convertir: ");
+                try
+                {
+                    double PSI = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                    Op_Presion.OpPSI(PSI);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")
+                    {
+                        goto Go;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+                break;
+            }
+        }
+        public static void CmdPa()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en Pascales a convertir: ");
+                try
+                {
+                    double Pa = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                    Op_Presion.OpPa(Pa);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")
+                    {
+                        goto Go;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+                break;
+            }
+        }
+        public static void CmdhPa()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en Hectopascales a convertir: ");
+                try
+                {
+                    double hPa = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                    Op_Presion.OphPa(hPa);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")
+                    {
+                        goto Go;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+                break;
+            }
+        }
+        public static void CmdmmhgTorr()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en Atmósferas a convertir: ");
+                try
+                {
+                    double mmHg = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                    Op_Presion.OpmmHgTorr(mmHg);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")
+                    {
+                        goto Go;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
+                break;
+            }
+        }
+        public static void CmdKpcm2()
+        {
+            bool r = true;
+            while (r)
+            {
+            Go:
+                Console.Write("Inserte una cantidad en Kilopondios por centímetro cuadrado a convertir: ");
+                try
+                {
+                    double kpcm2 = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                    Op_Presion.Opkpcm2(kpcm2);
+                }
+                catch (Exception e) when (e.GetType() != typeof(FormatException))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                catch (FormatException e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(FrmExc);
+                    Console.WriteLine($"\n{e.Message}\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                bool r1 = true;
+                while (r1)
+                {
+                    Console.WriteLine(reop);
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")
+                    {
+                        goto Go;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                        r1 = true;
+                    }
+                }
                 break;
             }
         }

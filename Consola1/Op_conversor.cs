@@ -5,7 +5,7 @@
  */
 using System;
 //Vamos a separar las clases dependiendo de la unidad a convertir
-namespace Consola
+namespace Zetaur
 {
     /// <summary>
     /// Clase con los métodos de transformación de unidades de temperaturas.
@@ -251,5 +251,70 @@ namespace Consola
             Console.WriteLine("{0} {1} son:\n{2} {3} o {4} {5}.\n{6} {7}, {8} {9} o {10} {11}.\n{12} {13}.\n{14} {15}.", St, masas[7], Kg, masas[0], g, masas[1], T, masas[2], UsT, masas[3], UkT, masas[4], Oz, masas[5], Lb, masas[6]);
         }
         #endregion
+    }
+    /// <summary>
+    /// Clase con los métodos de transformación de unidades de presión.
+    /// <list type="table">
+    /// <listheader><term>Unidad</term><description>Nombre de completo de unidad</description></listheader>
+    /// <item><term>atm</term><description>Atmósferas Técnicas</description></item>
+    /// <item><term>bar</term><description>Bares</description></item>
+    /// <item><term>mbar</term><description>Milibares</description></item>
+    /// <item><term>PSI</term><description>Libras por pulgada cuadrada</description></item>
+    /// <item><term>Pa</term><description>Pascales</description></item>
+    /// <item><term>hPa</term><description>Hectopascales</description></item>
+    /// <item><term>mmHg</term><description>Milímetros de Mercurio</description></item>
+    /// <item><term>torr</term><description>Torr</description></item>
+    /// </list>
+    /// </summary>
+    class Op_Presion
+    {
+        /// <summary>
+        /// 0 = Atm, 1 = bar, 2 = mbar, 3 = PSI, 4 = Pa, 5 = hPa, 6 = mmHg, 7 = Torr, 8 = kp/cm2
+        /// </summary>
+        static readonly string[] p = { "Atmósferas (atm)", "Bares (bar)", "Milibares (mbar)", "Libra por pulgada cuadrada (PSI)", "Pascales (Pa)", "Hectopascales (hPa)", "Milímetros de Mercurio (mmHg)", "Torr (torr)", "Kilopondio por centímetro cuadrado" };
+        /// <summary>
+        /// Transforma Atmósferas Técnicas al resto de unidades <see cref="Op_Presion"/>
+        /// </summary>
+        /// <param name="Atm">Atm es un número double que representa la cantidad a transformar</param>
+        public static void OpAtm(double Atm)
+        {
+            double bar = Atm * 1.01325, mbar = Atm * 1013.25, PSI = Atm * 14.6959, Pa = Atm * 101325, hPa = Pa / 100, mmHg = Atm * 760, kpcm2 = Atm * 1.03323;
+            Console.WriteLine($"{Atm} {p[0]} son:\n{bar} {p[1]} o {mbar} {p[2]}.\n{PSI} {p[3]}.\n{Pa} {p[4]} o {hPa} {p[5]}.\n{mmHg} {p[6]}/{p[7]}\n{kpcm2} {p[8]}");
+        }
+        public static void OpBar(double Bar)
+        {
+            double Atm = Bar / 1.01325, mBar = Bar * 1000, PSI = Bar * 14.5038, Pa = Bar * 100000, hPa = Pa / 100, mmHg = 750.062, kpcm2 = Bar * 1.01972;
+            Console.WriteLine($"{Bar} {p[1]} son: {mBar} {p[2]}.\n{Atm} {p[0]}.\n{PSI} {p[3]}.\n{Pa} {p[4]} o {hPa} {p[5]}.\n {mmHg} {p[6]}/{p[7]}.\n{kpcm2} {p[8]}");
+        }
+        public static void OpmBar(double mBar)
+        {
+            double Atm = mBar / 1013.25, Bar = mBar / 1000, PSI = mBar * 68.948, Pa = mBar * 100, hPa = mBar, mmHg = mBar / 1.333, kpcm2 = mBar / 981;
+            Console.WriteLine($"{mBar} {p[2]} son: {Bar} {p[1]}.\n{Atm} {p[0]}.\n{PSI} {p[3]}.\n{Pa} {p[4]} o {hPa} {p[5]}.\n {mmHg} {p[6]}/{p[7]}.\n{kpcm2} {p[8]}");
+        }
+        public static void OpPSI(double PSI)
+        {
+            double Atm = PSI / 14.696, Bar = PSI / 14.5038, mBar = Bar * 1000, Pa = PSI * 6895, hPa = PSI * 69.95, mmHg = PSI * 57.715, kpcm2 = PSI / 14.223;
+            Console.WriteLine($"{PSI} {p[3]} son: {Bar} {p[1]} o {mBar} {p[2]}.\n{Atm} {p[0]}.\n{Pa} {p[4]} o {hPa} {p[5]}.\n {mmHg} {p[6]}/{p[7]}.\n{kpcm2} {p[8]}");
+        }
+        public static void OpPa(double Pa)
+        {
+            double Atm = Pa / 101325, Bar = Pa / 100000, mBar = Bar * 1000, PSI = Pa / 6895, hPa = Pa / 100, mmHg = Pa / 133, kpcm2 = Pa / 98067;
+            Console.WriteLine($"{Pa} {p[4]} son: {Bar} {p[1]} o {mBar} {p[2]}.\n{Atm} {p[0]}.\n{PSI} {p[3]}.\n{hPa} {p[5]}.\n {mmHg} {p[6]}/{p[7]}.\n{kpcm2} {p[8]}");
+        }
+        public static void OphPa(double hPa)
+        {
+            double Pa = hPa * 100, Atm = Pa / 101325, Bar = Pa / 100000, mBar = Bar * 1000, PSI = Pa / 6895, mmHg = Pa / 133, kpcm2 = Pa / 98067;
+            Console.WriteLine($"{hPa} {p[5]} son: {Bar} {p[1]} o {mBar} {p[2]}.\n{Atm} {p[0]}.\n{PSI} {p[3]}.\n{Pa} {p[4]}.\n {mmHg} {p[6]}/{p[7]}.\n{kpcm2} {p[8]}");
+        }
+        public static void OpmmHgTorr(double mmHgTorr)
+        {
+            double Atm = mmHgTorr / 760, Bar = mmHgTorr / 750, mBar = Bar * 1000, PSI = mmHgTorr / 51.715, Pa = mmHgTorr * 133, hPa = Pa / 100, kpcm2 = mmHgTorr / 735.559;
+            Console.WriteLine($"{mmHgTorr} {p[6]}/{p[7]} son: {Bar} {p[1]} o {mBar} {p[2]}.\n{Atm} {p[0]}.\n{PSI} {p[3]}.\n{Pa} {p[4]} o {hPa} {p[5]}.\n{kpcm2} {p[8]}");
+        }
+        public static void Opkpcm2(double kpcm2)
+        {
+            double Atm = kpcm2 / 1.033, Bar = kpcm2 / 1.01972, mBar = Bar * 1000, PSI = kpcm2 * 14.223, Pa = kpcm2 * 98067, hPa = Pa / 100, mmHg = kpcm2 * 735.559;
+            Console.WriteLine($"{kpcm2} {p[8]} son: {Bar} {p[1]} o {mBar} {p[2]}.\n{Atm} {p[0]}.\n{PSI} {p[3]}\n{Pa} {p[4]} o {hPa} {p[5]}.\n {mmHg} {p[6]}/{p[7]}.");
+        }
     }
 }
