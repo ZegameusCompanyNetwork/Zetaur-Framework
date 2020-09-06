@@ -4,7 +4,6 @@
  *#########################################################
  */
 using System;
-using System.Windows.Forms;
 
 namespace Zetaur
 {
@@ -28,7 +27,7 @@ namespace Zetaur
                 }
                 else if (Cmd.ToLower() == cmnd[1])
                 {
-                    Console.Clear();//Limpiamos la pantalla            
+                    Console.Clear();//Limpiamos la pantalla
                     r = true;
                 }
                 else if (Cmd.ToLower() == cmnd[2])
@@ -39,7 +38,7 @@ namespace Zetaur
                 else if (Cmd.ToLower() == cmnd[3] || Cmd.ToLower() == cmnd[4])//comara si el valor de entrada es igual a cmnd[3] o a cmnd[4]
                 {
                     r = false;
-                    Application.Exit(); // Cierra la Consola
+                    System.Windows.Forms.Application.Exit(); // Cierra la Consola
                 }
                 else if (Cmd.ToLower() == cmnd[5])
                 {
