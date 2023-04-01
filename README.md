@@ -1,9 +1,10 @@
 # Zetaur - Net Framework
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/ZegameusCompanyNetwork/Consola-basica-con-comandos?color=green&label=Version&style=plastic)
-![GitHub](https://img.shields.io/github/license/ZegameusCompanyNetwork/Consola-basica-con-comandos?style=plastic)
-![GitHub All Releases](https://img.shields.io/github/downloads/ZegameusCompanyNetwork/Consola-basica-con-comandos/total?label=Descargas&style=plastic)
-![GitHub repo size](https://img.shields.io/github/repo-size/ZegameusCompanyNetwork/Consola-basica-con-comandos?color=AABBCC&label=Tama%C3%B1o&style=plastic)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ZegameusCompanyNetwork/Consola-basica-con-comandos/master?color=68f78e&style=plastic)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/ZegameusCompanyNetwork/Zetaur-Framework?color=green&label=Version&style=plastic)
+![GitHub](https://img.shields.io/github/license/ZegameusCompanyNetwork/Zetaur-Framework?style=plastic)
+![GitHub](https://img.shields.io/github/license/ZegameusCompanyNetwork/Zetaur-Framework?style=plastic)
+![GitHub All Releases](https://img.shields.io/github/downloads/ZegameusCompanyNetwork/Zetaur-Framework/total?label=Descargas&style=plastic)
+![GitHub repo size](https://img.shields.io/github/repo-size/ZegameusCompanyNetwork/Zetaur-Framework?style=plastic)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ZegameusCompanyNetwork/Zetaur-Framework/master?color=68f78e&style=plastic)
 ![Discord](https://img.shields.io/discord/306070603469815808?style=plastic)
 Esta consola está desarrollada en C# con .NetFramework y es muy simple de modificicar así como de ampliar con tus propias funcionalidades.
 La versión  en C# con .NetCore está en progreso incial, pronto la publicaré en otro repositorio.
