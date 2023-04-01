@@ -24,16 +24,53 @@ namespace Zetaur
         /// <param name="args"></param>
         public void Comand(params string[] args)
         {
+            bool sh_help=false;
+            //Añadir un bucle para comprobar si en el archivo de config esta puesto sh_help como true
+            if (args.Length != 0 && args.Length >=2)
+            {
+                if(args[0] == "true")
+                {
+                    if (args[1] == "true")
+                    {
+                        sh_help=true;
+                    }
+                    else
+                    {
+                        sh_help=false;
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else//No se ha pasado ningun argumento
+            {
+                sh_help=false;
+            }
+
+
+            //Lectura del comando del usuario
+
             bool r = true;
             while (r)
             {
-                string Ln_cmd = "\nIntroduce un comándo válido para continuar (teclé help para ayuda)\n>> ";
-                Console.Write(Ln_cmd);
+                
+                if (sh_help == true)
+                {
+                    Help_console();
+                    Console.Write("\nIntroduce un comándo válido para continuar\n>>");
+                }
+                else {
+                    string Ln_cmd = "\nIntroduce un comándo válido para continuar (teclé help para ayuda)\n>> ";
+                    Console.Write(Ln_cmd);
+                }
+                
                 string Cmd = Console.ReadLine();//Declaramos una variable de tipo string cuyo valor será asignado con la entrada de texto
                 Cmd = Cmd.ToLower();
                 if (Cmd == cmnd[0])
                 {
-                    About_console(); //Llamamos a un método descrito más abajo para iniciar el constructor
+                    About_console(args[6]); //Llamamos a un método descrito más abajo para iniciar el constructor
                     r = true;
                 }
                 else if (Cmd == cmnd[1])
@@ -88,14 +125,15 @@ namespace Zetaur
         /// <summary>
         /// Método de información sobre la aplicación.
         /// </summary>
-        public static void About_console()
+        public static void About_console(string version)
         {
             const string msg_about = "Esta aplicación de consola le permitira ver la hora y fecha actual en diferentes formatos,\nsaber que combinaciones de teclas pulsas, convertir unidades de longitud, temperatura, masa, presión; etc.";
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Programa creado y desarroyado por Zegameus Co. (ZCNR)");
-            Console.WriteLine("(c)Zegameus Company Network Records\nConsola de Prueba.");
+            Console.WriteLine("(c)Zegameus Company Network Records\nZetaur.");
             Console.WriteLine(msg_about);
+            Console.WriteLine($"Version: {version}");
             Console.WriteLine("Pulsa Cualquier tecla para continuar");
             Console.ReadKey();//espera hasta que se pulse una tecla
         }

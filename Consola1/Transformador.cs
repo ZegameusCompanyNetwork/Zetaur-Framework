@@ -517,7 +517,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -567,7 +567,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -618,7 +618,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -668,7 +668,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -717,7 +717,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -767,7 +767,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -816,7 +816,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -865,7 +865,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -914,6 +914,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -960,6 +961,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -1005,6 +1007,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -1050,6 +1053,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -1095,6 +1099,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -1140,6 +1145,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -1186,6 +1192,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
@@ -1231,6 +1238,7 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
+                Console.Write(reop);
                 bool gorep = false;
                 while (gorep == false)
                 {
