@@ -12,7 +12,17 @@ namespace Zetaur
         public string[] cmnd = new string[9] { "about", "clear", "conv", "exit", "salir", "help", "hora", "fact", "teclas" };
         /*Creamos un array con nuestros comandos personalizados, 
          * recomiendo el uso de números para hacer que sea más rápido el uso del programa*/
-        public void Comand()
+        /// <summary>
+        /// Método principal del programa.
+        /// Recibe un conjunto de argumentos, el cual puede ser nulo.
+        /// Posibles argumentos:
+        /// <list type="bullet">
+        /// <item>conf_en [true/false]: representa si hay un archivo de configuración y este está cargado.</item>
+        /// <item>sh_help [true/false]: activa o desactiva la opción de mostrar siempre los comandos cada vez que se accede al metodo Comand</item>
+        /// </list>
+        /// </summary>
+        /// <param name="args"></param>
+        public void Comand(params string[] args)
         {
             bool r = true;
             while (r)
@@ -20,32 +30,33 @@ namespace Zetaur
                 string Ln_cmd = "\nIntroduce un comándo válido para continuar (teclé help para ayuda)\n>> ";
                 Console.Write(Ln_cmd);
                 string Cmd = Console.ReadLine();//Declaramos una variable de tipo string cuyo valor será asignado con la entrada de texto
-                if (Cmd.ToLower() == cmnd[0])
+                Cmd = Cmd.ToLower();
+                if (Cmd == cmnd[0])
                 {
                     About_console(); //Llamamos a un método descrito más abajo para iniciar el constructor
                     r = true;
                 }
-                else if (Cmd.ToLower() == cmnd[1])
+                else if (Cmd == cmnd[1])
                 {
                     Console.Clear();//Limpiamos la pantalla
                     r = true;
                 }
-                else if (Cmd.ToLower() == cmnd[2])
+                else if (Cmd == cmnd[2])
                 {
                     Cmd_conversor.Cmd_prn();//Iniciamos el terminal de conversión
                     r = true;
                 }
-                else if (Cmd.ToLower() == cmnd[3] || Cmd.ToLower() == cmnd[4])//comara si el valor de entrada es igual a cmnd[3] o a cmnd[4]
+                else if (Cmd == cmnd[3] || Cmd == cmnd[4])//comara si el valor de entrada es igual a cmnd[3] o a cmnd[4]
                 {
                     r = false;
-                    System.Windows.Forms.Application.Exit(); // Cierra la Consola
+                    Environment.Exit(0); // Cierra la Consola
                 }
-                else if (Cmd.ToLower() == cmnd[5])
+                else if (Cmd == cmnd[5])
                 {
                     Help_console();//Llamamos al método de Help_console, programado más abajo
                     r = true;
                 }
-                else if (Cmd.ToLower() == cmnd[6])
+                else if (Cmd == cmnd[6])
                 {
                     Console.WriteLine($"Hora y Fecha: {DateTime.Now}\n");// Esto nos imprime la hora y la fecha en consola
                     Console.WriteLine($"Hora y Fecha personalizado: {DateTime.Now:hh:mm:ss.fff dd-MM-yy}"); //Aquí podemos establecer como se va ha mostrar la hora
@@ -54,14 +65,14 @@ namespace Zetaur
                     Console.Write($"Solo la Fecha: {DateTime.Now:dd / MM / yyyy}"); //Esto nos imprime solo la fecha
                     r = true;
                 }
-                else if (Cmd.ToLower() == cmnd[7])
+                else if (Cmd == cmnd[7])
                 {
                     Permcombrep perm = new Permcombrep();
                     perm.Factorial();
                     r = true;
 
                 }
-                else if (Cmd.ToLower() == cmnd[8])
+                else if (Cmd == cmnd[8])
                 {
                     Teclas teclas = new Teclas(); //llamamos a la clase Teclas
                     teclas.Wkeytouch();
@@ -94,7 +105,7 @@ namespace Zetaur
         public void Help_console()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Los comandos disponibles para esta app son:\n");
+            Console.WriteLine("\nLos comandos disponibles para esta app son:\n");
             Console.WriteLine($"{cmnd[0]}: Muestra información sobre la app.");
             Console.WriteLine($"{cmnd[1]}: limpia la pantalla.");
             Console.WriteLine($"{cmnd[2]}: Le cambia a la consola de conversores");

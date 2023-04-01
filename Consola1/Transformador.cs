@@ -15,7 +15,7 @@ namespace Zetaur
         private const string FrmExc = "Usted ha introducido un valor no númerico, por favor introduzca un número";//Declaro una constante para cuando el usuario cometa un excepción de tipo FormatException, más info abajo
         private const string Rp = "Otra temperatura que calcular? S/N: ";//Vamos a ahorrar espacio creando una constante para las repeticiones, en este caso para temperatura
         private const string reop = "Otra medida a convertir (S/N): ";//Y en este para las medidas de longitud
-        private const string vlno = "¿A introducido usted el valor adecuado?";//y esta para el S/N de continuar los bucles en caso de valor no admitido
+        private const string vlno = "¿A introducido usted el valor adecuado? Use S/N";//y esta para el S/N de continuar los bucles en caso de valor no admitido
         #region Temperatura
         private const string frmcv = "La formula para convertir de";
         private static readonly string[] temps = { "Celsius", "Fahrenheit", "Kelvins" };//para poder usar el array tenemos que ponerlo como static y para evitar su modificación lo ponemos como readonly
@@ -37,7 +37,7 @@ namespace Zetaur
                     //En caso de no poder por el motivo que sea, pasaremos al bloque catch.
                     Console.WriteLine("\n{0} {1} a {2} es: {3}", frmcv, temps[0], temps[1], frms[4]);//Para ahorrar espacio utilizamos variables para acortar el código
                     Console.WriteLine("{0} {1} a {2} es: {3}", frmcv, temps[0], temps[2], frms[2]);
-                    Op_Temp.OpCelFahrKel(cels);
+                    Op_Temp.Celsius(cels);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))//Aquí creamos un encapsulador que en caso de error va a comprobar que el tipo de excepción producida no sea FormatException.
                 //Y en caso de que sea FormatException, el programa ejecutara el código del catch que contenga el argumento FormatException 
@@ -54,24 +54,28 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 Console.WriteLine(Rp);
-            /*Creamos una condicion if, con un else if y con un else final, ya que este último vendría siendo el while; para mostrar en pantalla la cadena "go"
-             con la instrucción go.ToUpper() hacemos que el valor introducido se combierta a mayúsculas, y si no es igual a S (!= "S") hace que el bool rep
-             sea false, finalizando el bucle while
-             */
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                /*Creamos una condicion if, con un else if y con un else final, ya que este último vendría siendo el while; para mostrar en pantalla la cadena "go"
+                 con la instrucción go.ToUpper() hacemos que el valor introducido se combierta a mayúsculas, y si no es igual a S (!= "S") hace que el bool rep
+                 sea false, finalizando el bucle while
+                 */
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        gorep = true;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
 
@@ -92,7 +96,7 @@ namespace Zetaur
                     double fahr = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Console.WriteLine("\n{0} {1} a {2} es: {3}", frmcv, temps[1], temps[0], frms[0]);
                     Console.WriteLine("{0} {1} a {2} es: {3}", frmcv, temps[0], temps[2], frms[3]);
-                    Op_Temp.OpFahrCelKel(fahr);
+                    Op_Temp.Fahrenheits(fahr);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -108,20 +112,24 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 Console.WriteLine(Rp);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
 
@@ -142,7 +150,7 @@ namespace Zetaur
                     double kel = double.Parse(Regex.Replace(Console.ReadLine(), "[.,]", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
                     Console.WriteLine("\n{0} {1} a {2} es: {3}", frmcv, temps[2], temps[0], frms[1]);
                     Console.WriteLine("{0} {1} a {2} es: {3}", frmcv, temps[2], temps[1], frms[5]);
-                    Op_Temp.OpKelFahrCels(kel);
+                    Op_Temp.Kelvin(kel);
                 }
                 catch (Exception e) when (e.GetType() != typeof(FormatException))
                 {
@@ -158,20 +166,24 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 Console.WriteLine(Rp);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
 
@@ -203,20 +215,24 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);//llamamos a la constante reop declarada al inicio de la region Longitud, usamos solo Write para que se muestre a continuación el valor de S o N
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
         }
@@ -241,20 +257,24 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
         }
@@ -279,20 +299,24 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
-            go:
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
         }
@@ -317,22 +341,24 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
-            go:
-                Console.Write(reop);
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    Console.Clear();
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
         }
@@ -357,22 +383,24 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
-            go:
-                Console.Write(reop);
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    Console.Clear();
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
         }
@@ -397,22 +425,24 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                 }
                 Console.Write(reop);
-            go:
-                Console.Write(reop);
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    Console.Clear();
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
         }
@@ -436,22 +466,24 @@ namespace Zetaur
                     Console.WriteLine(FrmExc);
                     Console.WriteLine($"\n{e.Message}\n");
                 }
-            go:
-                Console.Write(reop);
-                string go = Console.ReadLine();
-                if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
-                }
-                else if (go.ToUpper() == "N")
-                {
-                    Console.Clear();
-                    rep = false;//Cambiamos de true a false
-                }
-                else
-                {
-                    Console.WriteLine(vlno);
-                    goto go;
+                    string go = Console.ReadLine();
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
+                    {
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
+                    }
+                    else if (go.ToUpper() == "N")
+                    {
+                        rep = false;//Cambiamos de true a false
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(vlno);
+                    }
                 }
             }
         }
@@ -462,10 +494,10 @@ namespace Zetaur
         /// </summary>
         public static void CmdKg()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
+             
                 Console.Write("Inserte una cantidad en Kilogramos a convertir: ");
                 try
                 {
@@ -486,28 +518,25 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
                     if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
-                        break;//salimos del primer bucle while
+                        rep = false;//Cambiamos de true a false
+                        break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-
-                break;//salimos del segundo bucle while
             }
         }
         /// <summary>
@@ -515,10 +544,10 @@ namespace Zetaur
         /// </summary>
         public static void CmdGr()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
+             
                 Console.Write("Inserte una cantidad en gramos a convertir: ");
                 try
                 {
@@ -539,28 +568,25 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
                     if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
-                        break;//salimos del primer bucle while
+                        rep = false;//Cambiamos de true a false
+                        break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-
-                break;
             }
 
         }
@@ -569,10 +595,10 @@ namespace Zetaur
         /// </summary>
         public static void CmdT()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
+             
                 Console.Write("Inserte una cantidad en toneladas a convertir: ");
                 try
                 {
@@ -593,28 +619,25 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
                     if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
-                        break;//salimos del primer bucle while
+                        rep = false;//Cambiamos de true a false
+                        break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-
-                break;
             }
         }
         /// <summary>
@@ -622,10 +645,10 @@ namespace Zetaur
         /// </summary>
         public static void CmdUsT()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
+             
                 Console.Write("Inserte una cantidad en toneladas cortas (Us t) a convertir: ");
                 try
                 {
@@ -646,28 +669,25 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
                     if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
-                        break;//salimos del primer bucle while
+                        rep = false;//Cambiamos de true a false
+                        break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-
-                break;
             }
         }
         /// <summary>
@@ -675,10 +695,9 @@ namespace Zetaur
         /// </summary>
         public static void CmdUkT()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
                 Console.Write("Inserte una cantidad en toneladas largas (Uk t) a convertir: ");
                 try
                 {
@@ -699,28 +718,25 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
                     if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
-                        break;//salimos del primer bucle while
+                        rep = false;//Cambiamos de true a false
+                        break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-
-                break;
             }
         }
         /// <summary>
@@ -728,10 +744,10 @@ namespace Zetaur
         /// </summary>
         public static void CmdLb()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
+            
                 Console.Write("Inserte una cantidad en libras a convertir: ");
                 try
                 {
@@ -752,28 +768,25 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
                     if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
-                        break;//salimos del primer bucle while
+                        rep = false;//Cambiamos de true a false
+                        break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-
-                break;
             }
         }
         /// <summary>
@@ -781,10 +794,9 @@ namespace Zetaur
         /// </summary>
         public static void CmdOz()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
                 Console.Write("Inserte una cantidad en onzas a convertir: ");
                 try
                 {
@@ -805,28 +817,25 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
                     if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
-                        break;//salimos del primer bucle while
+                        rep = false;//Cambiamos de true a false
+                        break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-
-                break;
             }
         }
         /// <summary>
@@ -834,10 +843,9 @@ namespace Zetaur
         /// </summary>
         public static void CmdSt()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
                 Console.Write("Inserte una cantidad en stones a convertir: ");
                 try
                 {
@@ -858,38 +866,35 @@ namespace Zetaur
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
                     if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;//Salimos a la fuerza del bucle 2 para volver al inicio de la operación.
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
-                        break;//salimos del primer bucle while
+                        rep = false;//Cambiamos de true a false
+                        break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-
-                break;
             }
         }
         #endregion
         #region Presion
         public static void CmdAtm()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
+            
                 Console.Write("Inserte una cantidad en Atmósferas a convertir: ");
                 try
                 {
@@ -909,35 +914,33 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
-                    if (go.ToUpper() == "S")
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
+                        rep = false;//Cambiamos de true a false
                         break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-                break;
             }
         }
         public static void CmdBar()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
+            
                 Console.Write("Inserte una cantidad en bares a convertir: ");
                 try
                 {
@@ -957,35 +960,32 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
-                    if (go.ToUpper() == "S")
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
+                        rep = false;//Cambiamos de true a false
                         break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-                break;
             }
         }
         public static void CmdmBar()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
                 Console.Write("Inserte una cantidad en milibares a convertir: ");
                 try
                 {
@@ -1005,35 +1005,32 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
-                    if (go.ToUpper() == "S")
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
+                        rep = false;//Cambiamos de true a false
                         break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-                break;
             }
         }
         public static void CmdPSI()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
                 Console.Write("Inserte una cantidad en PSI a convertir: ");
                 try
                 {
@@ -1053,35 +1050,32 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
-                    if (go.ToUpper() == "S")
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
+                        rep = false;//Cambiamos de true a false
                         break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-                break;
             }
         }
         public static void CmdPa()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
                 Console.Write("Inserte una cantidad en Pascales a convertir: ");
                 try
                 {
@@ -1101,35 +1095,32 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
-                    if (go.ToUpper() == "S")
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
+                        rep = false;//Cambiamos de true a false
                         break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-                break;
             }
         }
         public static void CmdhPa()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
                 Console.Write("Inserte una cantidad en Hectopascales a convertir: ");
                 try
                 {
@@ -1149,35 +1140,33 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
-                    if (go.ToUpper() == "S")
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
+                        rep = false;//Cambiamos de true a false
                         break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-                break;
             }
         }
         public static void CmdmmhgTorr()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
+            
                 Console.Write("Inserte una cantidad en Atmósferas a convertir: ");
                 try
                 {
@@ -1197,35 +1186,32 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
-                    if (go.ToUpper() == "S")
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
+                        rep = false;//Cambiamos de true a false
                         break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-                break;
             }
         }
         public static void CmdKpcm2()
         {
-            bool r = true;
-            while (r)
+            bool rep = true;
+            while (rep)
             {
-            Go:
                 Console.Write("Inserte una cantidad en Kilopondios por centímetro cuadrado a convertir: ");
                 try
                 {
@@ -1245,27 +1231,25 @@ namespace Zetaur
                     Console.WriteLine($"\n{e.Message}\n");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                bool r1 = true;
-                while (r1)
+                bool gorep = false;
+                while (gorep == false)
                 {
-                    Console.WriteLine(reop);
                     string go = Console.ReadLine();
-                    if (go.ToUpper() == "S")
+                    if (go.ToUpper() == "S")//Esto comprueba si el texto introducido en mayúsculas es igual a S, y en caso de ser diferente ejecuta el siguiente fragmento de código
                     {
-                        goto Go;
+                        rep = true;//mantenemos en true para poder ejecutar el bucle while de nuevo
+                        break;
                     }
                     else if (go.ToUpper() == "N")
                     {
-                        Console.Clear();
+                        rep = false;//Cambiamos de true a false
                         break;
                     }
                     else
                     {
                         Console.WriteLine(vlno);
-                        r1 = true;
                     }
                 }
-                break;
             }
         }
         #endregion

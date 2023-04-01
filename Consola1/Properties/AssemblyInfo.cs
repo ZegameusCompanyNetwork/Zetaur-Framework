@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Zegameus Company Network Records")]
 [assembly: AssemblyProduct("Zetaur .NET Framework")]
-[assembly: AssemblyCopyright("Copyright © Zegameus Company Network Records 2020")]
+[assembly: AssemblyCopyright("Copyright © Zegameus Company Network Records 2023")]
 [assembly: AssemblyTrademark("Zegameus Company Network Records")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Runtime.InteropServices;
 // Puede especificar todos los valores o utilizar los números de compilación y de revisión predeterminados
 // mediante el carácter '*', como se muestra a continuación:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.3.1")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.3.1.3")]
+[assembly: AssemblyFileVersion("1.3.1.3")]
 [assembly: NeutralResourcesLanguage("es-ES")]

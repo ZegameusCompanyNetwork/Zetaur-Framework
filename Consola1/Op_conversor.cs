@@ -18,24 +18,24 @@ namespace Zetaur
     /// </summary>
     class Op_Temp
     {
-        #region Celsius-Fahr-Kel
+        #region Celsius
         /// <summary>
         /// Método de conversión de Celsius a Fahrenheits y a Kelvins.
         /// </summary>
         /// <param name="cels">cels es un número double. Representa el valor entrante en celsius.</param>
-        public static void OpCelFahrKel(double cels)
+        public static void Celsius(double cels)
         {
             double fahr = (cels * 9 / 5) + 32; //Establecemos un valor para los grados Fahrenheit y la operación oportuna para transformarlos de grados Celsius a Fahrenheit
             double kel = cels + 273.15;//Importante el punto es la coma en programación cuando hablamos de nº decimales
             Console.WriteLine("{0}ºC son {1}ºF y {2}K", cels, fahr, kel); //Imprimimos en pantalla el valor en Fahrenheit y Kelvins
         }
         #endregion
-        #region Fahr-Celsius-Kel
+        #region Fahrenheits
         /// <summary>
         /// Método de conversión de Fahrenheits a Celisus y a Kelvins
         /// </summary>
         /// <param name="fahr">fahr es un número double. Representa el valor entrante en fahrenheits.</param>
-        public static void OpFahrCelKel(double fahr)
+        public static void Fahrenheits(double fahr)
         {
             double cels = (fahr - 32) * 5 / 9;//Importante restar primero
             double kel = (fahr - 32) * 5 / 9 + 273.15;
@@ -44,17 +44,29 @@ namespace Zetaur
         #endregion
         #region Kelvins
         /// <summary>
-        /// Método de conversión de Kelvins a Celsius y a Fahrenheits.
+        /// Método de conversión de Kelvins al resto de unidades
         /// </summary>
         /// <param name="kelvin">Kelvin es un número double. Representa el valor entrante en Kelvins</param>
-        public static void OpKelFahrCels(double kelvin)
+        public static void Kelvin(double kelvin)
         {
             double cels = kelvin - 273.15;
             double fahr = (kelvin - 273.15) * 9 / 5 + 32;
             Console.WriteLine("{0}K son {1}ºC y {2}ºF", kelvin, cels, fahr);
         }
         #endregion
+        #region Rankine
+        /// <summary>
+        /// Método de conversión de Rankine al resto de unidades
+        /// </summary>
+        /// <param name="i"></param>
+        public static void Rankine(double i)
+        {
+            double cels = (i - 491.67) * 5 / 9, fahr = i - 459.67, kel = i * 5 / 9, reaumur = (fahr - 32) * 4 / 9;
+            Console.WriteLine($"{i}R son: \n{cels}ºC\n{fahr}ºF\n{reaumur}ºRe");
+        }
+        #endregion
     }
+
     /// <summary>
     /// Clase con los métodos de transformación de unidades de longitud.
     /// <list type="table">
